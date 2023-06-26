@@ -11,7 +11,10 @@
 
   <ItemGroup>
     <Folder Include="Ressources\" />
-    <Folder Include="ServiceLayer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
