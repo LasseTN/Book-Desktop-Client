@@ -1,18 +1,20 @@
 ﻿using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+
 
 namespace Book_Desktop_Client.ServiceLayer {
     public class EmployeeServiceAccess : IEmployeeAccess {
 
         readonly IServiceConnection _Connection;
-        readonly String _ServiceBaseUrl = "https://localhost:7199/api/Employees";
+        readonly string _ServiceBaseUrl = "https://localhost:7199/api/Employee";
+
+        public EmployeeServiceAccess() {
+            _Connection = new ServiceConnection(_ServiceBaseUrl);
+
+        }
 
         public Task<Employee?> CreateEmployee(Employee employeeToCreate) {
             throw new NotImplementedException();
@@ -28,13 +30,13 @@ namespace Book_Desktop_Client.ServiceLayer {
             var temp1 = new List<Employee>();
 
             if (_Connection != null) {
-                _Connection.UserUrl = _Connection.BaseUrl;
+                _Connection.UseUrl = _Connection.BaseUrl;
 
                 try {
                     var serviceResponse = await _Connection.CallServiceGet();
                     
                     if (serviceResponse != null && serviceResponse.IsSuccessStatusCode) {
-                        if (serviceResponse.StatusCode == System.Net.HttpStatusCode.OK) {
+                        if (serviceResponse.StatusCode == HttpStatusCode.OK) {
                             var responseData = await serviceResponse!.Content.ReadAsStringAsync();
                             if (employees == null) {
 
@@ -43,7 +45,7 @@ namespace Book_Desktop_Client.ServiceLayer {
                                     employees = new List<Employee>();
                                 } else {
 
-                                    if (serviceResponse != null && serviceResponse.StatusCode == System.Net.HttpStatusCode.NotFound) {
+                                    if (serviceResponse != null && serviceResponse.StatusCode == HttpStatusCode.NotFound) {
                                         employees = new List<Employee>();
                                     }
                                 }

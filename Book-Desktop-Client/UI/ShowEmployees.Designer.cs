@@ -23,7 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            listView1 = new ListView();
+            listViewShowEmployees = new ListView();
             FirstName = new ColumnHeader();
             LastName = new ColumnHeader();
             Address = new ColumnHeader();
@@ -51,15 +51,16 @@
             btnGetEmployees = new Button();
             SuspendLayout();
             // 
-            // listView1
+            // listViewShowEmployees
             // 
-            listView1.Columns.AddRange(new ColumnHeader[] { FirstName, LastName, Address, Phone, Email, Birthdate, Id });
-            listView1.Location = new Point(70, 80);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(488, 292);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
-            listView1.View = View.Details;
+            listViewShowEmployees.Columns.AddRange(new ColumnHeader[] { FirstName, LastName, Address, Phone, Email, Birthdate, Id });
+            listViewShowEmployees.Location = new Point(70, 80);
+            listViewShowEmployees.Name = "listViewShowEmployees";
+            listViewShowEmployees.Size = new Size(488, 292);
+            listViewShowEmployees.TabIndex = 0;
+            listViewShowEmployees.UseCompatibleStateImageBehavior = false;
+            listViewShowEmployees.View = View.Details;
+            listViewShowEmployees.SelectedIndexChanged += listViewShowEmployees_SelectedIndexChanged;
             // 
             // FirstName
             // 
@@ -273,7 +274,7 @@
             Controls.Add(textBoxFirstName);
             Controls.Add(labelProcessText);
             Controls.Add(Medarbejderliste);
-            Controls.Add(listView1);
+            Controls.Add(listViewShowEmployees);
             Name = "ShowEmployees";
             Text = "ShowEmployees";
             ResumeLayout(false);
@@ -282,7 +283,7 @@
 
         #endregion
 
-        private ListView listView1;
+        private ListView listViewShowEmployees;
         private ColumnHeader FirstName;
         private ColumnHeader LastName;
         private ColumnHeader Phone;
