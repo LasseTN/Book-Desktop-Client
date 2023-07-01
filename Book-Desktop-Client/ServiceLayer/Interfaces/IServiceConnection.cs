@@ -12,6 +12,6 @@ namespace Book_Desktop_Client.ServiceLayer.Interfaces {
         Task<HttpResponseMessage?> CallServiceGet();
         Task<HttpResponseMessage?> CallServicePost(StringContent postJson);
         Task<HttpResponseMessage?> CallServicePost(HttpRequestMessage postRequest);
-        Task<HttpResponseMessage?> CallServicePut();
+        Task<HttpResponseMessage?> CallServicePut(StringContent postData);
     }
 }

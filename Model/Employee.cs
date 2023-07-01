@@ -1,7 +1,6 @@
 ﻿namespace Model {
     public class Employee {
-
-        public int? Id { get; set; }
+        public int? EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
@@ -11,11 +10,11 @@
 
         public Employee() { }
 
-        public Employee(int id, string firstName, string lastName, DateTime birthdate, string address, string phone, string email) {
-            Id = id;
+        public Employee(int employeeId, string firstName, string lastName, DateTime birthDate, string address, string phone, string email) {
+            EmployeeId = employeeId;
             FirstName = firstName;
             LastName = lastName;
-            BirthDate = birthdate;
+            BirthDate = birthDate;
             Address = address;
             Phone = phone;
             Email = email;

@@ -16,12 +16,49 @@ namespace Book_Desktop_Client.ServiceLayer {
 
         }
 
-        public Task<Employee?> CreateEmployee(Employee employeeToCreate) {
-            throw new NotImplementedException();
+        public async Task<Employee?> CreateEmployee(Employee employeeToCreate) {
+            Employee? foundEmployee = null;
+
+            _Connection.UseUrl = _Connection.BaseUrl;
+
+            try {
+                var json = JsonConvert.SerializeObject(employeeToCreate);
+                var postData = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _Connection.CallServicePost(postData);
+
+                if (response != null && response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    foundEmployee = JsonConvert.DeserializeObject<Employee>(content);
+                }
+            } catch (Exception) {
+                throw;
+            }
+            return foundEmployee;
         }
 
-        public Task<bool> DeleteEmployee(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteEmployee(int id) {
+            bool deleteEmployee = false;
+
+            _Connection.UseUrl = _Connection.BaseUrl;
+
+            if (id > 0) {
+                _Connection.UseUrl += $"/{id}";
+            }
+
+            if (_Connection != null) {
+                try {
+                    var response = await _Connection.CallServiceDelete();
+                    if (response != null && response.IsSuccessStatusCode) {
+                        deleteEmployee = true;
+                    } else {
+                        deleteEmployee = false;
+                    }
+                } catch {
+                    deleteEmployee= false;
+                }
+            }
+            return deleteEmployee;
         }
 
         public async Task<List<Employee>?> GetEmployees() {
@@ -62,8 +99,25 @@ namespace Book_Desktop_Client.ServiceLayer {
             return temp1;
         }
 
-        public Task<bool> UpdateChosenEmployee(int id, Employee update) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateChosenEmployeeById(int id, Employee update) {
+            bool updateOk;
+
+            _Connection.UseUrl = _Connection.BaseUrl + $"/{id}";
+
+            try {
+                var Json = JsonConvert.SerializeObject(update);
+                var postData = new StringContent(Json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _Connection.CallServicePut(postData);
+                if (response != null && response.IsSuccessStatusCode) {
+                    updateOk = true;
+                } else {
+                    updateOk = false;
+                }
+            } catch  {
+                updateOk = false;
+            }
+            return updateOk;
         }
     }
 }

@@ -11,12 +11,22 @@ namespace Book_Desktop_Client.ControlLayer {
         public EmployeeControl() {
             _employeeAccess = new EmployeeServiceAccess();
         }
-        public Task<Employee> CreateNewEmployee(EmployeeControl employeeToCreate) {
-            throw new NotImplementedException();
+        public async Task<Employee> CreateNewEmployee(Employee employeeToCreate) {
+            Employee? createdEmployee;
+            try {
+                createdEmployee = await _employeeAccess.CreateEmployee(employeeToCreate);
+            } catch (Exception ex) {
+                createdEmployee = null;
+            }
+            return createdEmployee;
         }
 
-        public Task<bool> DeleteEmployees(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteEmployees(int id) {
+            bool employeeDeleted = false;
+            if (id > 0) {
+                employeeDeleted = await _employeeAccess.DeleteEmployee(id);
+            }
+            return employeeDeleted;
         }
 
         public async Task<List<Employee>?> GetAllEmployees() {
@@ -27,8 +37,14 @@ namespace Book_Desktop_Client.ControlLayer {
             return foundEmployees;
         }
 
-        public Task<bool> UpdateEmployeeById(int id, Employee update) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateEmployeeById(int id, Employee update) {
+            bool wasUpdated;
+            try {
+                wasUpdated = await _employeeAccess.UpdateChosenEmployeeById(id, update);
+            } catch {
+                wasUpdated = false;
+            }
+            return wasUpdated;
         }
     }
 }

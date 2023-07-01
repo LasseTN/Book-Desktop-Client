@@ -13,8 +13,12 @@ namespace Book_Desktop_Client.ServiceLayer {
             UseUrl = BaseUrl;
         }
 
-        public Task<HttpResponseMessage?> CallServiceDelete() {
-            throw new NotImplementedException();
+        public async Task<HttpResponseMessage?> CallServiceDelete() {
+            HttpResponseMessage? httpResponseMessage = null;
+            if (UseUrl != null) {
+                httpResponseMessage = await HttpEnabler.DeleteAsync(UseUrl);
+            }
+            return httpResponseMessage;
         }
 
         public async Task<HttpResponseMessage?> CallServiceGet() {
@@ -25,16 +29,24 @@ namespace Book_Desktop_Client.ServiceLayer {
             return httpResponseMessage;
         }
 
-        public Task<HttpResponseMessage?> CallServicePost(StringContent postJson) {
-            throw new NotImplementedException();
+        public async Task<HttpResponseMessage?> CallServicePost(StringContent postJson) {
+            HttpResponseMessage? httpResponseMessage = null;
+            if (UseUrl != null) {
+                httpResponseMessage = await HttpEnabler.PostAsync(UseUrl, postJson);
+            }
+            return httpResponseMessage;
         }
 
         public Task<HttpResponseMessage?> CallServicePost(HttpRequestMessage postRequest) {
             throw new NotImplementedException();
         }
 
-        public Task<HttpResponseMessage?> CallServicePut() {
-            throw new NotImplementedException();
+        public async Task<HttpResponseMessage?> CallServicePut(StringContent putJson) {
+            HttpResponseMessage? httpResponseMessage = null;
+            if (UseUrl != null) {
+                httpResponseMessage = await HttpEnabler.PutAsync(UseUrl, putJson);
+            }
+            return httpResponseMessage;
         }
     }
 }
