@@ -62,8 +62,48 @@ namespace Book_Desktop_Client.UI {
 
 
 
-        private void buttonCreateGenre_Click(object sender, EventArgs e) {
+        private async void buttonCreateGenre_Click(object sender, EventArgs e) {
 
+            Genre? createdGenre = null;
+            labelProcessText.Text = "Arbejder på sagen...";
+
+            string genreName = textBoxGenre.Text;
+
+            if (InputIsOk(genreName)) {
+                Genre genreToCreate = new Genre(-1, genreName);
+                createdGenre = await _genreControl.CreateNewGenre(genreToCreate);
+
+                if (createdGenre == null) {
+                    labelProcessText.Text = "Der skete en fejl";
+                    MessageBox.Show("Genren blev ikke oprettet, prøv igen");
+
+
+                } else {
+                    labelProcessText.Text = "Ok!";
+                    MessageBox.Show($"{createdGenre.GenreName} med id {createdGenre.GenreId.ToString()} er oprettet");
+
+                }
+            } else {
+                labelProcessText.Text = "Udfyld venligst alle felterne";
+                MessageBox.Show("Udfyld venligst alle felterne");
+            }
+            UpdateList();
+            ClearTextBoxes();
+        }
+
+        private async void ClearTextBoxes() {
+            textBoxGenre.Clear();
+            textBoxGenreId.Clear();
+        }
+
+        private bool InputIsOk(string genreName) {
+            bool isValidInput = false;
+            if (!string.IsNullOrWhiteSpace(genreName)) {
+                if (genreName.Length > 1) {
+                    isValidInput = true;
+                }
+            }
+            return isValidInput;
         }
 
         private void buttonUpdateGenre_Click(object sender, EventArgs e) {
@@ -83,8 +123,22 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
-        private void listViewShowGenres_SelectedIndexChanged(object sender, EventArgs e) {
+        private async void listViewShowGenres_SelectedIndexChanged(object sender, EventArgs e) {
+            string procesText = "Genre id";
 
+            if (listViewShowGenres.SelectedItems.Count > 0) {
+                ListViewItem item = listViewShowGenres.SelectedItems[0];
+
+                textBoxGenre.Text = item.SubItems[0].Text;
+                textBoxGenreId.Text = item.SubItems[1].Text;
+                labelProcessText.Text = procesText + listViewShowGenres.SelectedItems[0].SubItems[1].Text;
+
+            } else if (listViewShowGenres.SelectedItems.Count <= 0) {
+
+                textBoxGenre.Text = string.Empty;
+                textBoxGenreId.Text += string.Empty;
+                UpdateProcessText();
+            }
         }
     }
 }

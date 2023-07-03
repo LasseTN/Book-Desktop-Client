@@ -33,18 +33,24 @@
             buttonUpdateGenre = new Button();
             buttonDeleteGenre = new Button();
             buttonCloseWindow = new Button();
-            textBox1 = new TextBox();
+            textBoxGenreId = new TextBox();
             labelGenreId = new Label();
             labelProcessText = new Label();
+            Genre = new ColumnHeader();
+            Id = new ColumnHeader();
             SuspendLayout();
             // 
             // listViewShowGenres
             // 
+            listViewShowGenres.BackColor = SystemColors.ScrollBar;
+            listViewShowGenres.Columns.AddRange(new ColumnHeader[] { Genre, Id });
+            listViewShowGenres.Cursor = Cursors.Hand;
             listViewShowGenres.Location = new Point(65, 99);
             listViewShowGenres.Name = "listViewShowGenres";
             listViewShowGenres.Size = new Size(348, 264);
             listViewShowGenres.TabIndex = 0;
             listViewShowGenres.UseCompatibleStateImageBehavior = false;
+            listViewShowGenres.View = View.Details;
             listViewShowGenres.SelectedIndexChanged += listViewShowGenres_SelectedIndexChanged;
             // 
             // label1
@@ -138,12 +144,12 @@
             buttonCloseWindow.UseVisualStyleBackColor = false;
             buttonCloseWindow.Click += buttonCloseWindow_Click;
             // 
-            // textBox1
+            // textBoxGenreId
             // 
-            textBox1.Location = new Point(459, 177);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(116, 23);
-            textBox1.TabIndex = 11;
+            textBoxGenreId.Location = new Point(459, 177);
+            textBoxGenreId.Name = "textBoxGenreId";
+            textBoxGenreId.Size = new Size(116, 23);
+            textBoxGenreId.TabIndex = 11;
             // 
             // labelGenreId
             // 
@@ -173,7 +179,7 @@
             ClientSize = new Size(858, 500);
             Controls.Add(labelProcessText);
             Controls.Add(labelGenreId);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxGenreId);
             Controls.Add(buttonCloseWindow);
             Controls.Add(buttonDeleteGenre);
             Controls.Add(buttonUpdateGenre);
@@ -203,8 +209,10 @@
         private Button buttonUpdateGenre;
         private Button buttonDeleteGenre;
         private Button buttonCloseWindow;
-        private TextBox textBox1;
+        private TextBox textBoxGenreId;
         private Label labelGenreId;
         private Label labelProcessText;
+        private ColumnHeader Genre;
+        private ColumnHeader Id;
     }
 }
