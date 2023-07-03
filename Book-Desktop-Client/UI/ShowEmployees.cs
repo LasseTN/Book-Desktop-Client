@@ -95,9 +95,6 @@ namespace Book_Desktop_Client.UI {
         }
 
 
-
-
-
         private async void buttonUpdateEmployee_Click(object sender, EventArgs e) {
             if (listViewShowEmployees.SelectedItems.Count != 0) {
 

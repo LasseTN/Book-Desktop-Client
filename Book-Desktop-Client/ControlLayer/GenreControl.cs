@@ -25,8 +25,12 @@ namespace Book_Desktop_Client.ControlLayer {
             throw new NotImplementedException();
         }
 
-        public Task<List<Genre>?> GetAllGenres() {
-            throw new NotImplementedException();
+        public async Task<List<Genre>?> GetAllGenres() {
+            List<Genre>? foundGenres = null;
+            if (_genreServiceAccess != null) {
+                foundGenres = await _genreServiceAccess.GetAllGenres();
+            }
+            return foundGenres;
         }
 
         public Task<bool> UpdateGenreById(int id, Genre update) {

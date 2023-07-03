@@ -23,9 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            listView1 = new ListView();
+            listViewShowGenres = new ListView();
             label1 = new Label();
-            buttoShowGenres = new Button();
+            buttoGetGenres = new Button();
             buttonCreateGenre = new Button();
             label2 = new Label();
             label3 = new Label();
@@ -35,15 +35,17 @@
             buttonCloseWindow = new Button();
             textBox1 = new TextBox();
             labelGenreId = new Label();
+            labelProcessText = new Label();
             SuspendLayout();
             // 
-            // listView1
+            // listViewShowGenres
             // 
-            listView1.Location = new Point(65, 99);
-            listView1.Name = "listView1";
-            listView1.Size = new Size(348, 264);
-            listView1.TabIndex = 0;
-            listView1.UseCompatibleStateImageBehavior = false;
+            listViewShowGenres.Location = new Point(65, 99);
+            listViewShowGenres.Name = "listViewShowGenres";
+            listViewShowGenres.Size = new Size(348, 264);
+            listViewShowGenres.TabIndex = 0;
+            listViewShowGenres.UseCompatibleStateImageBehavior = false;
+            listViewShowGenres.SelectedIndexChanged += listViewShowGenres_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -56,15 +58,15 @@
             label1.TabIndex = 1;
             label1.Text = "Liste over genrer";
             // 
-            // buttoShowGenres
+            // buttoGetGenres
             // 
-            buttoShowGenres.Location = new Point(65, 396);
-            buttoShowGenres.Name = "buttoShowGenres";
-            buttoShowGenres.Size = new Size(75, 23);
-            buttoShowGenres.TabIndex = 2;
-            buttoShowGenres.Text = "Vis genrer";
-            buttoShowGenres.UseVisualStyleBackColor = true;
-            buttoShowGenres.Click += buttoShowGenres_Click;
+            buttoGetGenres.Location = new Point(65, 396);
+            buttoGetGenres.Name = "buttoGetGenres";
+            buttoGetGenres.Size = new Size(75, 23);
+            buttoGetGenres.TabIndex = 2;
+            buttoGetGenres.Text = "Vis genrer";
+            buttoGetGenres.UseVisualStyleBackColor = true;
+            buttoGetGenres.Click += buttoGetGenres_Click;
             // 
             // buttonCreateGenre
             // 
@@ -154,12 +156,22 @@
             labelGenreId.TabIndex = 12;
             labelGenreId.Text = "Genre id";
             // 
+            // labelProcessText
+            // 
+            labelProcessText.AutoSize = true;
+            labelProcessText.Location = new Point(65, 443);
+            labelProcessText.Name = "labelProcessText";
+            labelProcessText.Size = new Size(16, 15);
+            labelProcessText.TabIndex = 13;
+            labelProcessText.Text = "...";
+            // 
             // ShowGenre
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(858, 500);
+            Controls.Add(labelProcessText);
             Controls.Add(labelGenreId);
             Controls.Add(textBox1);
             Controls.Add(buttonCloseWindow);
@@ -169,9 +181,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(buttonCreateGenre);
-            Controls.Add(buttoShowGenres);
+            Controls.Add(buttoGetGenres);
             Controls.Add(label1);
-            Controls.Add(listView1);
+            Controls.Add(listViewShowGenres);
             ForeColor = SystemColors.ControlText;
             Name = "ShowGenre";
             Text = "ShowGenrer";
@@ -181,9 +193,9 @@
 
         #endregion
 
-        private ListView listView1;
+        private ListView listViewShowGenres;
         private Label label1;
-        private Button buttoShowGenres;
+        private Button buttoGetGenres;
         private Button buttonCreateGenre;
         private Label label2;
         private Label label3;
@@ -193,5 +205,6 @@
         private Button buttonCloseWindow;
         private TextBox textBox1;
         private Label labelGenreId;
+        private Label labelProcessText;
     }
 }
