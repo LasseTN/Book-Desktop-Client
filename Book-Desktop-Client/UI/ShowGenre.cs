@@ -1,10 +1,12 @@
 ﻿using Book_Desktop_Client.ControlLayer;
 using Book_Desktop_Client.ControlLayer.Interfaces;
 using Book_Desktop_Client.ServiceLayer.Interfaces;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,9 +33,34 @@ namespace Book_Desktop_Client.UI {
             await UpdateProcessText();
         }
 
-        private Task UpdateList() {
-            throw new NotImplementedException();
+        private async Task UpdateList() {
+            string processText = "Ok";
+            listViewShowGenres.Items.Clear();
+            List<Genre> genres = await _genreControl.GetAllGenres();
+
+            if (genres != null) {
+
+                if (genres.Count >= 1) {
+
+                    processText = "Genrer blev opdateret";
+
+                } else {
+                    processText = "Ingen genrere fundet";
+                }
+
+                foreach (Genre genre in genres) {
+                    string[] details = { genre.GenreName, genre.GenreId.ToString() };
+                    ListViewItem genreDetails = new ListViewItem(details);
+                    listViewShowGenres.Items.Add(genreDetails);
+                }
+            } else {
+                processText = "Noget gik galt";
+            }
+            labelProcessText.Text = processText;
         }
+
+
+
 
         private void buttonCreateGenre_Click(object sender, EventArgs e) {
 
