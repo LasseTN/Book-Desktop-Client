@@ -12,5 +12,16 @@ namespace Book_Desktop_Client {
             showEmployee.ShowDialog();
             this.Show();
         }
+
+        private void button2_Click(object sender, EventArgs e) {
+            var showGenre = new ShowGenre();
+            this.Hide();
+            showGenre.ShowDialog();
+            this.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e) {
+
+        }
     }
 }

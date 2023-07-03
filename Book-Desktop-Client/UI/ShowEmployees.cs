@@ -70,8 +70,8 @@ namespace Book_Desktop_Client.UI {
                 textBoxFirstName.Text = item.SubItems[0].Text;
                 textBoxLastName.Text = item.SubItems[1].Text;
                 textBoxAddress.Text = item.SubItems[2].Text;
-                textBoxMobil.Text = item.SubItems[3].Text;
-                textBoxEmail.Text = item.SubItems[4].Text;
+                textBoxMobil.Text = item.SubItems[4].Text;
+                textBoxEmail.Text = item.SubItems[3].Text;
                 textBoxEmployeeId.Text = item.SubItems[6].Text;
                 labelProcessText.Text = processText + listViewShowEmployees.SelectedItems[0].SubItems[6].Text;
 
@@ -113,13 +113,14 @@ namespace Book_Desktop_Client.UI {
 
             bool wasUpdatedOk;
             string processText = "Medarbejderen blev opdateret";
+            int idRaw = GetAsInt(textBoxEmployeeId.Text);
             string firstName = textBoxFirstName.Text;
             string lastName = textBoxLastName.Text;
             string address = textBoxAddress.Text;
             string mobil = textBoxMobil.Text;
             string email = textBoxEmail.Text;
             DateTime birthDate = dateTimePickerEmployee.Value;
-            int idRaw = GetAsInt(textBoxEmployeeId.Text);
+            
 
             if (idRaw != 0 && !string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(address) && !string.IsNullOrEmpty(mobil) && !string.IsNullOrEmpty(email)) {
                 // Call service to POST

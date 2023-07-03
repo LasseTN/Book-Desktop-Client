@@ -26,16 +26,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomePage));
             flowLayoutPanel1 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
+            Menu = new GroupBox();
+            button2 = new Button();
             button1 = new Button();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            Menu.SuspendLayout();
             SuspendLayout();
             // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.BackColor = SystemColors.Info;
             flowLayoutPanel1.Controls.Add(pictureBox1);
-            flowLayoutPanel1.Controls.Add(button1);
+            flowLayoutPanel1.Controls.Add(Menu);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(0, 0);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -47,13 +50,38 @@
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(422, 424);
-            pictureBox1.TabIndex = 0;
+            pictureBox1.Size = new Size(422, 143);
+            pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // Menu
+            // 
+            Menu.Controls.Add(button1);
+            Menu.Controls.Add(button2);
+            Menu.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            Menu.Location = new Point(3, 152);
+            Menu.Name = "Menu";
+            Menu.Size = new Size(1015, 501);
+            Menu.TabIndex = 5;
+            Menu.TabStop = false;
+            Menu.Text = "Menu";
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button2.Location = new Point(9, 110);
+            button2.Name = "button2";
+            button2.Size = new Size(210, 50);
+            button2.TabIndex = 2;
+            button2.Text = "Vis genrer";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
-            button1.Location = new Point(431, 3);
+            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.Location = new Point(9, 43);
             button1.Name = "button1";
             button1.Size = new Size(210, 50);
             button1.TabIndex = 1;
@@ -71,13 +99,16 @@
             Text = "Form1";
             flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            Menu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private FlowLayoutPanel flowLayoutPanel1;
-        private PictureBox pictureBox1;
         private Button button1;
+        private Button button2;
+        private PictureBox pictureBox1;
+        private GroupBox Menu;
     }
 }
