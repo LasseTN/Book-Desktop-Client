@@ -1,15 +1,24 @@
 ﻿using Book_Desktop_Client.ControlLayer.Interfaces;
+using Book_Desktop_Client.ServiceLayer;
+using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Book_Desktop_Client.ControlLayer {
     public class GenreControl : IGenreControl {
-        public Task<Genre> CreateNewGenre(Genre genreToCreate) {
-            throw new NotImplementedException();
+
+        readonly IGenreAccess _genreServiceAccess;
+
+        public GenreControl() {
+            _genreServiceAccess = new GenreServiceAccess();
+        }
+        public async Task<Genre> CreateNewGenre(Genre genreToCreate) {
+            Genre? createdGenre;
+            try {
+                createdGenre = await _genreServiceAccess.CreateGenre(genreToCreate);
+            } catch (Exception ex) {
+                createdGenre = null;
+            }
+            return createdGenre;
         }
 
         public Task<bool> DeleteGenre(int id) {
