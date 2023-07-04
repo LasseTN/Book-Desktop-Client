@@ -24,6 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             listViewShowGenres = new ListView();
+            Genre = new ColumnHeader();
+            Id = new ColumnHeader();
             label1 = new Label();
             buttoGetGenres = new Button();
             buttonCreateGenre = new Button();
@@ -36,8 +38,6 @@
             textBoxGenreId = new TextBox();
             labelGenreId = new Label();
             labelProcessText = new Label();
-            Genre = new ColumnHeader();
-            Id = new ColumnHeader();
             SuspendLayout();
             // 
             // listViewShowGenres
@@ -47,11 +47,21 @@
             listViewShowGenres.Cursor = Cursors.Hand;
             listViewShowGenres.Location = new Point(65, 99);
             listViewShowGenres.Name = "listViewShowGenres";
-            listViewShowGenres.Size = new Size(348, 264);
+            listViewShowGenres.Size = new Size(245, 250);
             listViewShowGenres.TabIndex = 0;
             listViewShowGenres.UseCompatibleStateImageBehavior = false;
             listViewShowGenres.View = View.Details;
             listViewShowGenres.SelectedIndexChanged += listViewShowGenres_SelectedIndexChanged;
+            // 
+            // Genre
+            // 
+            Genre.Text = "Genre";
+            Genre.Width = 150;
+            // 
+            // Id
+            // 
+            Id.Text = "Id";
+            Id.Width = 70;
             // 
             // label1
             // 
@@ -76,7 +86,7 @@
             // 
             // buttonCreateGenre
             // 
-            buttonCreateGenre.Location = new Point(459, 396);
+            buttonCreateGenre.Location = new Point(362, 396);
             buttonCreateGenre.Name = "buttonCreateGenre";
             buttonCreateGenre.Size = new Size(95, 23);
             buttonCreateGenre.TabIndex = 4;
@@ -89,7 +99,7 @@
             label2.AutoSize = true;
             label2.BackColor = SystemColors.Info;
             label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(459, 26);
+            label2.Location = new Point(362, 26);
             label2.Name = "label2";
             label2.Size = new Size(71, 15);
             label2.TabIndex = 5;
@@ -100,7 +110,7 @@
             label3.AutoSize = true;
             label3.BackColor = SystemColors.Info;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(459, 70);
+            label3.Location = new Point(362, 70);
             label3.Name = "label3";
             label3.Size = new Size(42, 15);
             label3.TabIndex = 6;
@@ -108,14 +118,14 @@
             // 
             // textBoxGenre
             // 
-            textBoxGenre.Location = new Point(459, 99);
+            textBoxGenre.Location = new Point(362, 99);
             textBoxGenre.Name = "textBoxGenre";
             textBoxGenre.Size = new Size(116, 23);
             textBoxGenre.TabIndex = 7;
             // 
             // buttonUpdateGenre
             // 
-            buttonUpdateGenre.Location = new Point(573, 396);
+            buttonUpdateGenre.Location = new Point(476, 396);
             buttonUpdateGenre.Name = "buttonUpdateGenre";
             buttonUpdateGenre.Size = new Size(95, 23);
             buttonUpdateGenre.TabIndex = 8;
@@ -125,7 +135,7 @@
             // 
             // buttonDeleteGenre
             // 
-            buttonDeleteGenre.Location = new Point(684, 396);
+            buttonDeleteGenre.Location = new Point(587, 396);
             buttonDeleteGenre.Name = "buttonDeleteGenre";
             buttonDeleteGenre.Size = new Size(95, 23);
             buttonDeleteGenre.TabIndex = 9;
@@ -136,7 +146,7 @@
             // buttonCloseWindow
             // 
             buttonCloseWindow.BackColor = Color.Salmon;
-            buttonCloseWindow.Location = new Point(684, 443);
+            buttonCloseWindow.Location = new Point(587, 443);
             buttonCloseWindow.Name = "buttonCloseWindow";
             buttonCloseWindow.Size = new Size(95, 23);
             buttonCloseWindow.TabIndex = 10;
@@ -146,7 +156,7 @@
             // 
             // textBoxGenreId
             // 
-            textBoxGenreId.Location = new Point(459, 177);
+            textBoxGenreId.Location = new Point(362, 177);
             textBoxGenreId.Name = "textBoxGenreId";
             textBoxGenreId.Size = new Size(116, 23);
             textBoxGenreId.TabIndex = 11;
@@ -156,7 +166,7 @@
             labelGenreId.AutoSize = true;
             labelGenreId.BackColor = SystemColors.Info;
             labelGenreId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelGenreId.Location = new Point(459, 150);
+            labelGenreId.Location = new Point(362, 150);
             labelGenreId.Name = "labelGenreId";
             labelGenreId.Size = new Size(55, 15);
             labelGenreId.TabIndex = 12;
@@ -176,7 +186,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
-            ClientSize = new Size(858, 500);
+            ClientSize = new Size(738, 493);
             Controls.Add(labelProcessText);
             Controls.Add(labelGenreId);
             Controls.Add(textBoxGenreId);
