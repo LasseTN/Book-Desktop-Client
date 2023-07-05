@@ -39,8 +39,28 @@ namespace Book_Desktop_Client.ServiceLayer {
             return foundGenre;
         }
 
-        public Task<bool> DeleteGenre(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteGenre(int id) {
+            bool deleteGenre = false;
+
+            _Connection.UseUrl = _Connection.BaseUrl;
+
+            if (id > 0) {
+                _Connection.UseUrl += $"/{id}";
+            }
+
+            if (_Connection != null) {
+                try {
+                    var response = await _Connection.CallServiceDelete();
+                    if (response != null && response.IsSuccessStatusCode) {
+                        deleteGenre = true;
+                    } else {
+                        deleteGenre = false;
+                    }
+                } catch {
+                    deleteGenre = false;
+                }
+            }
+            return deleteGenre;
         }
 
         public async Task<List<Genre>?> GetAllGenres() {
@@ -80,8 +100,25 @@ namespace Book_Desktop_Client.ServiceLayer {
             return temp1;
         }
 
-        public Task<bool> UpdateChoosenGenreById(int id, Genre genreToUpdate) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateChoosenGenreById(int id, Genre genreToUpdate) {
+            bool updateOk;
+
+            _Connection.UseUrl = _Connection.BaseUrl + $"/{id}";
+
+            try {
+                var Json = JsonConvert.SerializeObject(genreToUpdate);
+                var postData = new StringContent(Json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _Connection.CallServicePut(postData);
+                if (response != null && response.IsSuccessStatusCode) {
+                    updateOk = true;
+                } else {
+                    updateOk = false;
+                }
+            } catch {
+                updateOk = false;
+            }
+            return updateOk;
         }
     }
 }

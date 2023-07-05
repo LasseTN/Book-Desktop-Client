@@ -47,7 +47,7 @@
             listViewShowGenres.Cursor = Cursors.Hand;
             listViewShowGenres.Location = new Point(65, 99);
             listViewShowGenres.Name = "listViewShowGenres";
-            listViewShowGenres.Size = new Size(245, 250);
+            listViewShowGenres.Size = new Size(245, 269);
             listViewShowGenres.TabIndex = 0;
             listViewShowGenres.UseCompatibleStateImageBehavior = false;
             listViewShowGenres.View = View.Details;

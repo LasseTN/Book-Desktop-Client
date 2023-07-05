@@ -21,8 +21,12 @@ namespace Book_Desktop_Client.ControlLayer {
             return createdGenre;
         }
 
-        public Task<bool> DeleteGenre(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteGenre(int id) {
+            bool wasDeleted = false;
+            if (id > 0) { 
+                wasDeleted = await _genreServiceAccess.DeleteGenre(id);
+            }
+            return wasDeleted;
         }
 
         public async Task<List<Genre>?> GetAllGenres() {
@@ -33,8 +37,14 @@ namespace Book_Desktop_Client.ControlLayer {
             return foundGenres;
         }
 
-        public Task<bool> UpdateGenreById(int id, Genre update) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateGenreById(int id, Genre update) {
+            bool wasUpdated;
+            try {
+                wasUpdated = await _genreServiceAccess.UpdateChoosenGenreById(id, update);
+            } catch {
+                wasUpdated = false;
+            }
+            return wasUpdated;
         }
     }
 }

@@ -24,6 +24,18 @@ namespace Book_Desktop_Client.UI {
             UpdateProcessText();
         }
 
+        private int GetAsInt(string rawString) {
+            int foundId = -1;
+
+            if (!string.IsNullOrEmpty(rawString)) {
+                bool wasParseOk = int.TryParse(rawString.Trim(), out foundId);
+                if (!wasParseOk) {
+                    foundId = -1;
+                }
+            }
+            return foundId;
+        }
+
         private async Task UpdateProcessText() {
             labelProcessText.Text = "Der er lige nu " + listViewShowGenres.Items.Count.ToString() + " genrer på listen";
         }
@@ -91,7 +103,7 @@ namespace Book_Desktop_Client.UI {
             ClearTextBoxes();
         }
 
-        private async void ClearTextBoxes() {
+        private async Task ClearTextBoxes() {
             textBoxGenre.Clear();
             textBoxGenreId.Clear();
         }
@@ -106,9 +118,39 @@ namespace Book_Desktop_Client.UI {
             return isValidInput;
         }
 
-        private void buttonUpdateGenre_Click(object sender, EventArgs e) {
+        private async void buttonUpdateGenre_Click(object sender, EventArgs e) {
+            if (listViewShowGenres.SelectedItems.Count != 0) {
 
+                await UpdateGenre();
+                await UpdateList();
+            } else {
+                MessageBox.Show("Du skal vælge en genre fra listen");
+            }
+            await ClearTextBoxes();
         }
+
+        private async Task UpdateGenre() {
+
+            bool wasUpdatedOk;
+            string processText = "Genren blev opdateret";
+            int idRaw = GetAsInt(textBoxGenreId.Text);
+            string genreName = textBoxGenre.Text;
+
+            if (idRaw != 0 && !string.IsNullOrEmpty(genreName)) { 
+                
+                Genre gen = new Genre(idRaw, genreName);
+
+                wasUpdatedOk = await _genreControl.UpdateGenreById(idRaw, gen);
+            } else {
+                wasUpdatedOk = false;
+            }
+            if (!wasUpdatedOk) {
+                processText = "Genren blev ikke opdateret";
+            }
+            labelProcessText.Text = processText;
+        }
+
+
 
         private void buttonDeleteGenre_Click(object sender, EventArgs e) {
 
