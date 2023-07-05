@@ -152,8 +152,36 @@ namespace Book_Desktop_Client.UI {
 
 
 
-        private void buttonDeleteGenre_Click(object sender, EventArgs e) {
+        private async void buttonDeleteGenre_Click(object sender, EventArgs e) {
+             
+            if (listViewShowGenres.SelectedItems.Count != 0) {
+                DialogResult dialogResult = MessageBox.Show("Er du sikker på at du vil slette den valgte genrer?", "Bekræft", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes) {
 
+                    await DeleteGenre();
+                    await UpdateList();
+                    await ClearTextBoxes();
+
+                } else if (dialogResult == DialogResult.No) {
+                    MessageBox.Show("Du skal vælge en genre fra listen");
+                }
+                await UpdateProcessText();
+            }
+        }
+
+        private async Task DeleteGenre() {
+            string processText = "Ok";
+
+            int id;
+            id = GetAsInt(textBoxGenreId.Text);
+
+            if (id > 0) {
+                await _genreControl.DeleteGenre(id);
+                processText = "Ok";
+                await UpdateList();
+            } else {
+                processText = "Something went wrong";
+            }
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
