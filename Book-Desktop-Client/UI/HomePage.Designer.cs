@@ -27,9 +27,9 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
             Menu = new GroupBox();
+            button3 = new Button();
             button1 = new Button();
             button2 = new Button();
-            button3 = new Button();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             Menu.SuspendLayout();
@@ -69,6 +69,17 @@
             Menu.TabStop = false;
             Menu.Text = "Menu";
             // 
+            // button3
+            // 
+            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button3.Location = new Point(9, 178);
+            button3.Name = "button3";
+            button3.Size = new Size(210, 50);
+            button3.TabIndex = 3;
+            button3.Text = "Administrer lokationer";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // button1
             // 
             button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
@@ -76,7 +87,7 @@
             button1.Name = "button1";
             button1.Size = new Size(210, 50);
             button1.TabIndex = 1;
-            button1.Text = "Vis medarbejdere";
+            button1.Text = "Administrer medarbejdere";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -87,20 +98,9 @@
             button2.Name = "button2";
             button2.Size = new Size(210, 50);
             button2.TabIndex = 2;
-            button2.Text = "Vis genrer";
+            button2.Text = "Administrer genrer";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
-            // 
-            // button3
-            // 
-            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            button3.Location = new Point(9, 178);
-            button3.Name = "button3";
-            button3.Size = new Size(210, 50);
-            button3.TabIndex = 3;
-            button3.Text = "Vis lokationer";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
             // 
             // HomePage
             // 
