@@ -30,5 +30,12 @@ namespace Book_Desktop_Client {
             ShowLocation.ShowDialog();
             this.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e) {
+            var ShowBook = new ShowBooks();
+            this.Hide();
+            ShowBook.ShowDialog();
+            this.Show();
+        }
     }
 }

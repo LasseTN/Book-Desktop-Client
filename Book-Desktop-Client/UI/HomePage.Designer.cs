@@ -30,6 +30,7 @@
             button3 = new Button();
             button1 = new Button();
             button2 = new Button();
+            button4 = new Button();
             flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             Menu.SuspendLayout();
@@ -58,6 +59,7 @@
             // 
             // Menu
             // 
+            Menu.Controls.Add(button4);
             Menu.Controls.Add(button3);
             Menu.Controls.Add(button1);
             Menu.Controls.Add(button2);
@@ -102,6 +104,17 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button4
+            // 
+            button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            button4.Location = new Point(9, 247);
+            button4.Name = "button4";
+            button4.Size = new Size(210, 50);
+            button4.TabIndex = 4;
+            button4.Text = "Administrer bog";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // HomePage
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -124,5 +137,6 @@
         private PictureBox pictureBox1;
         private GroupBox Menu;
         private Button button3;
+        private Button button4;
     }
 }
