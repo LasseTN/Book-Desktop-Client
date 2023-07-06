@@ -1,6 +1,9 @@
 ﻿using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
-
+using Newtonsoft.Json;
+using System.Linq.Expressions;
+using System.Net;
+using System.Text;
 
 namespace Book_Desktop_Client.ServiceLayer {
     public class LocationServiceAccess : ILocationAccess {
@@ -11,16 +14,63 @@ namespace Book_Desktop_Client.ServiceLayer {
         public LocationServiceAccess() {
             _connection = new ServiceConnection(_ServiceBaseUrl);
         }
-        public Task<Location?> CreateLocation(Location locationToCreate) {
-            throw new NotImplementedException();
+        public async Task<Location?> CreateLocation(Location locationToCreate) {
+            Location? foundLocation = null;
+
+            _connection.UseUrl = _connection.BaseUrl;
+
+            try {
+                var json = JsonConvert.SerializeObject(locationToCreate);
+                var postData = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _connection.CallServicePost(postData);
+
+                if (response != null && response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    foundLocation = JsonConvert.DeserializeObject<Location>(content);
+                }
+            } catch (Exception) {
+                throw;
+            }
+            return foundLocation;
         }
 
         public Task<bool> DeleteLocation(int id) {
             throw new NotImplementedException();
         }
 
-        public Task<List<Location>?> GetAllLocations() {
-            throw new NotImplementedException();
+        public async Task<List<Location>?> GetAllLocations() {
+            List<Location>? locations = null;
+            var temp1 = new List<Location>();
+
+            if (_connection !=  null) {
+                _connection.UseUrl = _connection.BaseUrl;
+
+                try {
+                    var serviceResponse = await _connection.CallServiceGet();
+                    if (serviceResponse != null && serviceResponse.IsSuccessStatusCode) {
+                        if (serviceResponse.StatusCode == HttpStatusCode.OK) {
+                            var responseData = await serviceResponse!.Content.ReadAsStringAsync();
+
+                            temp1 = JsonConvert.DeserializeObject<List<Location>>(responseData);
+                            if (temp1 != null) {
+                                locations = new List<Location>();
+                            } else {
+
+                                if (serviceResponse != null && serviceResponse.StatusCode == HttpStatusCode.NotFound) {
+                                    locations = new List<Location>();
+                                }
+                            }
+                        } else {
+                            locations = null;
+                        }
+                    }
+                } catch (Exception ex) {
+                    string notFound = ex.Message;
+                    locations = null;
+                }
+            }
+            return temp1;
         }
 
         public Task<bool> UpdateChoosenLocationById(int id, Location locationToUpdate) {

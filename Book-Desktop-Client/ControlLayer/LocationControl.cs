@@ -12,16 +12,26 @@ namespace Book_Desktop_Client.ControlLayer {
             _locationServiceAccess = new LocationServiceAccess();
         }
 
-        public Task<Location> CreateNewLocation(Location locationToCreate) {
-            throw new NotImplementedException();
+        public async Task<Location> CreateNewLocation(Location locationToCreate) {
+            Location? createdLocation;
+            try {
+                createdLocation = await _locationServiceAccess.CreateLocation(locationToCreate);
+            } catch (Exception ex) {
+                createdLocation = null;
+            }
+            return createdLocation;
         }
 
         public Task<bool> DeleteLocation(int id) {
             throw new NotImplementedException();
         }
 
-        public Task<List<Location>?> GetAllLocation() {
-            throw new NotImplementedException();
+        public async Task<List<Location>?> GetAllLocation() {
+            List<Location>? foundLocations = null;
+            if (_locationServiceAccess != null) {
+                foundLocations = await _locationServiceAccess.GetAllLocations();
+            }
+            return foundLocations;
         }
 
         public Task<bool> UpdateLocationById(int id, Location update) {
