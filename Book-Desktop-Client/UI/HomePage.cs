@@ -23,5 +23,12 @@ namespace Book_Desktop_Client {
         private void pictureBox1_Click(object sender, EventArgs e) {
 
         }
+
+        private void button3_Click(object sender, EventArgs e) {
+            var ShowLocation = new ShowLocations();
+            this.Hide();
+            ShowLocation.ShowDialog();
+            this.Show();
+        }
     }
 }
