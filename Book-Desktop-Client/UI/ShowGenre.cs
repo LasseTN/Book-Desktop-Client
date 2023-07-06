@@ -189,7 +189,7 @@ namespace Book_Desktop_Client.UI {
             if (dialogResult == DialogResult.Yes) {
                 Close();
             } else if (dialogResult == DialogResult.No) {
-                // Handle "No" case here
+
             }
         }
 

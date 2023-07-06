@@ -23,12 +23,35 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ShowBooks";
+            buttonCloseWindow = new Button();
+            SuspendLayout();
+            // 
+            // buttonCloseWindow
+            // 
+            buttonCloseWindow.BackColor = Color.Salmon;
+            buttonCloseWindow.Location = new Point(619, 378);
+            buttonCloseWindow.Name = "buttonCloseWindow";
+            buttonCloseWindow.Size = new Size(95, 23);
+            buttonCloseWindow.TabIndex = 22;
+            buttonCloseWindow.Text = "Luk vinduet";
+            buttonCloseWindow.UseVisualStyleBackColor = false;
+            buttonCloseWindow.Click += buttonCloseWindow_Click;
+            // 
+            // ShowBooks
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Info;
+            ClientSize = new Size(800, 450);
+            Controls.Add(buttonCloseWindow);
+            ForeColor = SystemColors.ControlText;
+            Name = "ShowBooks";
+            Text = "ShowBooks";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Button buttonCloseWindow;
     }
 }

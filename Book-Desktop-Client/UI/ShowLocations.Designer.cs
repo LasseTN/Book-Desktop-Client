@@ -174,6 +174,7 @@
             buttonCloseWindow.TabIndex = 21;
             buttonCloseWindow.Text = "Luk vinduet";
             buttonCloseWindow.UseVisualStyleBackColor = false;
+            buttonCloseWindow.Click += buttonCloseWindow_Click;
             // 
             // ShowLocations
             // 

@@ -13,5 +13,14 @@ namespace Book_Desktop_Client.UI {
         public ShowLocations() {
             InitializeComponent();
         }
+
+        private void buttonCloseWindow_Click(object sender, EventArgs e) {
+            DialogResult dialogResult = MessageBox.Show("Er du sikker på at du vil lukke vinduet?", "Bekræft", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes) {
+                Close();
+            } else if (dialogResult == DialogResult.No) {
+
+            }
+        }
     }
 }
