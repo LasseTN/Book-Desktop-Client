@@ -73,6 +73,7 @@
             listViewShowLocations.TabIndex = 7;
             listViewShowLocations.UseCompatibleStateImageBehavior = false;
             listViewShowLocations.View = View.Details;
+            listViewShowLocations.SelectedIndexChanged += listViewShowLocations_SelectedIndexChanged;
             // 
             // Lokation
             // 
@@ -137,6 +138,7 @@
             buttoGetLocations.TabIndex = 17;
             buttoGetLocations.Text = "Vis lokationer";
             buttoGetLocations.UseVisualStyleBackColor = true;
+            buttoGetLocations.Click += buttoGetLocations_Click;
             // 
             // buttonCreateLocation
             // 
@@ -146,6 +148,7 @@
             buttonCreateLocation.TabIndex = 18;
             buttonCreateLocation.Text = "Tilføj lokation";
             buttonCreateLocation.UseVisualStyleBackColor = true;
+            buttonCreateLocation.Click += buttonCreateLocation_Click;
             // 
             // buttonUpdateLocation
             // 
@@ -155,6 +158,7 @@
             buttonUpdateLocation.TabIndex = 19;
             buttonUpdateLocation.Text = "Opdater lokation";
             buttonUpdateLocation.UseVisualStyleBackColor = true;
+            buttonUpdateLocation.Click += buttonUpdateLocation_Click;
             // 
             // buttonDeleteLocation
             // 
@@ -164,6 +168,7 @@
             buttonDeleteLocation.TabIndex = 20;
             buttonDeleteLocation.Text = "Slet lokation";
             buttonDeleteLocation.UseVisualStyleBackColor = true;
+            buttonDeleteLocation.Click += buttonDeleteLocation_Click;
             // 
             // buttonCloseWindow
             // 
