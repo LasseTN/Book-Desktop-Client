@@ -35,9 +35,9 @@
             labelProcessText = new Label();
             buttoGetLocations = new Button();
             buttonCreateLocation = new Button();
-            buttonUpdateLocation = new Button();
             buttonDeleteLocation = new Button();
             buttonCloseWindow = new Button();
+            buttonUpdate = new Button();
             SuspendLayout();
             // 
             // label1
@@ -150,16 +150,6 @@
             buttonCreateLocation.UseVisualStyleBackColor = true;
             buttonCreateLocation.Click += buttonCreateLocation_Click;
             // 
-            // buttonUpdateLocation
-            // 
-            buttonUpdateLocation.Location = new Point(479, 384);
-            buttonUpdateLocation.Name = "buttonUpdateLocation";
-            buttonUpdateLocation.Size = new Size(105, 23);
-            buttonUpdateLocation.TabIndex = 19;
-            buttonUpdateLocation.Text = "Opdater lokation";
-            buttonUpdateLocation.UseVisualStyleBackColor = true;
-            buttonUpdateLocation.Click += buttonUpdateLocation_Click;
-            // 
             // buttonDeleteLocation
             // 
             buttonDeleteLocation.Location = new Point(608, 384);
@@ -181,15 +171,25 @@
             buttonCloseWindow.UseVisualStyleBackColor = false;
             buttonCloseWindow.Click += buttonCloseWindow_Click;
             // 
+            // buttonUpdate
+            // 
+            buttonUpdate.Location = new Point(477, 384);
+            buttonUpdate.Name = "buttonUpdate";
+            buttonUpdate.Size = new Size(115, 23);
+            buttonUpdate.TabIndex = 22;
+            buttonUpdate.Text = "Opdater lokation";
+            buttonUpdate.UseVisualStyleBackColor = true;
+            buttonUpdate.Click += ButtonUpdateLocation_Click;
+            // 
             // ShowLocations
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(738, 493);
+            Controls.Add(buttonUpdate);
             Controls.Add(buttonCloseWindow);
             Controls.Add(buttonDeleteLocation);
-            Controls.Add(buttonUpdateLocation);
             Controls.Add(buttonCreateLocation);
             Controls.Add(buttoGetLocations);
             Controls.Add(labelProcessText);
@@ -220,8 +220,8 @@
         private Label labelProcessText;
         private Button buttoGetLocations;
         private Button buttonCreateLocation;
-        private Button buttonUpdateLocation;
         private Button buttonDeleteLocation;
         private Button buttonCloseWindow;
+        private Button buttonUpdate;
     }
 }

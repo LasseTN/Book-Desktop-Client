@@ -1,7 +1,6 @@
 ﻿using Book_Desktop_Client.ControlLayer;
 using Book_Desktop_Client.ControlLayer.Interfaces;
 using Model;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowLocations : Form {
@@ -10,6 +9,18 @@ namespace Book_Desktop_Client.UI {
             InitializeComponent();
 
             _locationControl = new LocationControl();
+        }
+
+        private int GetAsInt(string rawString) {
+            int foundId = -1;
+
+            if (!string.IsNullOrEmpty(rawString)) {
+                bool wasParseOk = int.TryParse(rawString.Trim(), out foundId);
+                if (!wasParseOk) {
+                    foundId = -1;
+                }
+            }
+            return foundId;
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
@@ -79,7 +90,7 @@ namespace Book_Desktop_Client.UI {
                     labelProcessText.Text = "Ok!";
                     MessageBox.Show($"{createdLocation.LocationName} med id {createdLocation.LocationId.ToString()} er oprettet");
 
-                } 
+                }
             } else {
                 labelProcessText.Text = "Udfyld venligst alle felterne";
                 MessageBox.Show($"Udfyld venligst alle felterne");
@@ -103,16 +114,89 @@ namespace Book_Desktop_Client.UI {
             return isValidInput;
         }
 
-        private void buttonUpdateLocation_Click(object sender, EventArgs e) {
+        private async void ButtonUpdateLocation_Click(object sender, EventArgs e) {
+            if (listViewShowLocations.SelectedItems.Count != 0) {
 
+                await UpdateLocation();
+                await UpdateList();
+            } else {
+                MessageBox.Show("Du skal vælge en lokation på listen");
+            }
+            await ClearTextBoxes();
         }
 
-        private void buttonDeleteLocation_Click(object sender, EventArgs e) {
 
+        private async void buttonDeleteLocation_Click(object sender, EventArgs e) {
+
+            if (listViewShowLocations.SelectedItems.Count != 0) {
+                DialogResult dialogResult = MessageBox.Show("Er du sikker på at du vil slette den valgte lokation?", "Bekræft", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes) {
+
+                    await DeleteGenre();
+                    await UpdateList();
+                    await ClearTextBoxes();
+
+                } else if (dialogResult == DialogResult.No) {
+                    MessageBox.Show("Du skal vælge en lokation fra listen");
+                }
+                await UpdateProcessText();
+            }
         }
 
-        private void listViewShowLocations_SelectedIndexChanged(object sender, EventArgs e) {
+        private async Task DeleteGenre() {
+            string processText = "Ok";
 
+            int id;
+            id = GetAsInt(textBoxLocationId.Text);
+
+            if (id > 0) {
+                await _locationControl.DeleteLocation(id);
+                processText = "Ok";
+                await UpdateList();
+            } else {
+                processText = "Something went wrong";
+            }
+        }
+
+
+
+        private async void listViewShowLocations_SelectedIndexChanged(object sender, EventArgs e) {
+            string processText = "Genre id";
+
+            if (listViewShowLocations.SelectedItems.Count > 0) {
+                ListViewItem item = listViewShowLocations.SelectedItems[0];
+
+                textBoxLocation.Text = item.SubItems[0].Text;
+                textBoxLocationId.Text = item.SubItems[1].Text;
+                labelProcessText.Text = processText + listViewShowLocations.SelectedItems[0].SubItems[1].Text;
+
+            } else if (listViewShowLocations.SelectedItems.Count <= 0) {
+
+                textBoxLocation.Text = string.Empty;
+                textBoxLocationId.Text = string.Empty;
+                UpdateProcessText();
+            }
+        }
+
+        private async Task UpdateLocation() {
+            bool wasUpdateOk;
+            string processText = "Lokationen blev opdateret";
+            int idRaw = GetAsInt(textBoxLocationId.Text);
+            string locationName = textBoxLocation.Text;
+
+            if (idRaw != 0 && !string.IsNullOrEmpty(locationName)) {
+
+                Location loc = new Location(idRaw, locationName);
+
+                wasUpdateOk = await _locationControl.UpdateLocationById(idRaw, loc);
+            } else {
+                wasUpdateOk = false;
+            }
+            if (!wasUpdateOk) {
+                processText = "Lokationen blev ikke opdateret";
+            }
+            labelProcessText.Text = processText;
         }
     }
-}
+    }
+
