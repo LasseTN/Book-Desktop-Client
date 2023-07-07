@@ -22,8 +22,12 @@ namespace Book_Desktop_Client.ControlLayer {
             return createdLocation;
         }
 
-        public Task<bool> DeleteLocation(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteLocation(int id) {
+            bool wasDeleted = false;
+            if (id > 0) {
+                wasDeleted = await _locationServiceAccess.DeleteLocation(id);
+            }
+            return wasDeleted;
         }
 
         public async Task<List<Location>?> GetAllLocations() {
@@ -34,8 +38,14 @@ namespace Book_Desktop_Client.ControlLayer {
             return foundLocations;
         }
 
-        public Task<bool> UpdateLocationById(int id, Location update) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateLocationById(int id, Location update) {
+            bool wasUpdated;
+            try {
+                wasUpdated = await _locationServiceAccess.UpdateChoosenLocationById(id, update);
+            } catch {
+                wasUpdated = false;
+            }
+            return wasUpdated;
         }
     }
 }
