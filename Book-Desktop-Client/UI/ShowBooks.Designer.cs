@@ -58,6 +58,7 @@
             buttonGetAllBooks = new Button();
             buttonUpdateBook = new Button();
             buttonDeleteBook = new Button();
+            buttonPicture = new Button();
             SuspendLayout();
             // 
             // buttonCloseWindow
@@ -338,12 +339,22 @@
             buttonDeleteBook.Text = "Slet bog";
             buttonDeleteBook.UseVisualStyleBackColor = true;
             // 
+            // buttonPicture
+            // 
+            buttonPicture.Location = new Point(763, 610);
+            buttonPicture.Name = "buttonPicture";
+            buttonPicture.Size = new Size(121, 34);
+            buttonPicture.TabIndex = 48;
+            buttonPicture.Text = "Vælg billedfil";
+            buttonPicture.UseVisualStyleBackColor = true;
+            // 
             // ShowBooks
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(1453, 718);
+            Controls.Add(buttonPicture);
             Controls.Add(buttonDeleteBook);
             Controls.Add(buttonUpdateBook);
             Controls.Add(buttonGetAllBooks);
@@ -414,5 +425,6 @@
         private Button buttonGetAllBooks;
         private Button buttonUpdateBook;
         private Button buttonDeleteBook;
+        private Button buttonPicture;
     }
 }
