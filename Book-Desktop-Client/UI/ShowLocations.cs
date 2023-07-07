@@ -198,5 +198,5 @@ namespace Book_Desktop_Client.UI {
             labelProcessText.Text = processText;
         }
     }
-    }
+}
 

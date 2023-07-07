@@ -22,5 +22,9 @@ namespace Book_Desktop_Client.UI {
 
             }
         }
+
+        private void BookList_Click(object sender, EventArgs e) {
+
+        }
     }
 }
