@@ -59,8 +59,48 @@ namespace Book_Desktop_Client.UI {
         }
 
 
-        private void buttonCreateLocation_Click(object sender, EventArgs e) {
+        private async void buttonCreateLocation_Click(object sender, EventArgs e) {
 
+            Location? createdLocation = null;
+            labelProcessText.Text = "Arbejder på sagen...";
+
+            string locationName = textBoxLocation.Text;
+
+            if (InputIsOk(locationName)) {
+                Location locationToCreate = new Location(-1, locationName);
+                createdLocation = await _locationControl.CreateNewLocation(locationToCreate);
+
+                if (createdLocation == null) {
+                    labelProcessText.Text = "Der skete en fejl";
+                    MessageBox.Show("Lokationen blev ikke oprettet, prøv igen");
+
+
+                } else {
+                    labelProcessText.Text = "Ok!";
+                    MessageBox.Show($"{createdLocation.LocationName} med id {createdLocation.LocationId.ToString()} er oprettet");
+
+                } 
+            } else {
+                labelProcessText.Text = "Udfyld venligst alle felterne";
+                MessageBox.Show($"Udfyld venligst alle felterne");
+            }
+            UpdateList();
+            ClearTextBoxes();
+        }
+
+        private async Task ClearTextBoxes() {
+            textBoxLocation.Clear();
+            textBoxLocationId.Clear();
+        }
+
+        private bool InputIsOk(string locationName) {
+            bool isValidInput = false;
+            if (!string.IsNullOrWhiteSpace(locationName)) {
+                if (locationName.Length > 1) {
+                    isValidInput = true;
+                }
+            }
+            return isValidInput;
         }
 
         private void buttonUpdateLocation_Click(object sender, EventArgs e) {
