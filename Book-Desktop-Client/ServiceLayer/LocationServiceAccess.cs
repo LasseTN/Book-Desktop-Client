@@ -34,8 +34,28 @@ namespace Book_Desktop_Client.ServiceLayer {
             return foundLocation;
         }
 
-        public Task<bool> DeleteLocation(int id) {
-            throw new NotImplementedException();
+        public async Task<bool> DeleteLocation(int id) {
+            bool deleteLocation = false;
+
+            _Connection.UseUrl = _Connection.BaseUrl;
+
+            if (id > 0) {
+                _Connection.UseUrl += $"/{id}";
+            }
+
+            if (_Connection != null) {
+                try {
+                    var response = await _Connection.CallServiceDelete();
+                    if (response != null && response.IsSuccessStatusCode) {
+                        deleteLocation = true;
+                    } else {
+                        deleteLocation = false;
+                    }
+                } catch {
+                    deleteLocation = false;
+                }
+            }
+            return deleteLocation;
         }
 
 
@@ -78,8 +98,25 @@ namespace Book_Desktop_Client.ServiceLayer {
         }
 
 
-        public Task<bool> UpdateChoosenLocationById(int id, Location locationToUpdate) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateChoosenLocationById(int id, Location locationToUpdate) {
+            bool updateOk;
+
+            _Connection.UseUrl = _Connection.BaseUrl + $"/{id}";
+
+            try {
+                var Json = JsonConvert.SerializeObject(locationToUpdate);
+                var postData = new StringContent(Json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _Connection.CallServicePut(postData);
+                if (response != null && response.IsSuccessStatusCode) {
+                    updateOk = true;
+                } else {
+                    updateOk = false;
+                }
+            } catch {
+                updateOk = false;
+            }
+            return updateOk;
         }
     }
 }
