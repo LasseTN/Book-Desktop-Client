@@ -24,7 +24,7 @@
         /// </summary>
         private void InitializeComponent() {
             buttonCloseWindow = new Button();
-            listViewShowEmployees = new ListView();
+            listViewShowBooks = new ListView();
             Titel = new ColumnHeader();
             Forfatter = new ColumnHeader();
             Genre = new ColumnHeader();
@@ -72,17 +72,17 @@
             buttonCloseWindow.UseVisualStyleBackColor = false;
             buttonCloseWindow.Click += buttonCloseWindow_Click;
             // 
-            // listViewShowEmployees
+            // listViewShowBooks
             // 
-            listViewShowEmployees.BackColor = SystemColors.ScrollBar;
-            listViewShowEmployees.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, Status, bogId });
-            listViewShowEmployees.Cursor = Cursors.Hand;
-            listViewShowEmployees.Location = new Point(60, 93);
-            listViewShowEmployees.Name = "listViewShowEmployees";
-            listViewShowEmployees.Size = new Size(824, 487);
-            listViewShowEmployees.TabIndex = 23;
-            listViewShowEmployees.UseCompatibleStateImageBehavior = false;
-            listViewShowEmployees.View = View.Details;
+            listViewShowBooks.BackColor = SystemColors.ScrollBar;
+            listViewShowBooks.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, Status, bogId });
+            listViewShowBooks.Cursor = Cursors.Hand;
+            listViewShowBooks.Location = new Point(60, 93);
+            listViewShowBooks.Name = "listViewShowBooks";
+            listViewShowBooks.Size = new Size(824, 487);
+            listViewShowBooks.TabIndex = 23;
+            listViewShowBooks.UseCompatibleStateImageBehavior = false;
+            listViewShowBooks.View = View.Details;
             // 
             // Titel
             // 
@@ -311,6 +311,7 @@
             buttonCreateBook.TabIndex = 44;
             buttonCreateBook.Text = "Tilføj bog";
             buttonCreateBook.UseVisualStyleBackColor = true;
+            buttonCreateBook.Click += buttonCreateBook_Click;
             // 
             // buttonGetAllBooks
             // 
@@ -320,6 +321,7 @@
             buttonGetAllBooks.TabIndex = 45;
             buttonGetAllBooks.Text = "Vis bøger";
             buttonGetAllBooks.UseVisualStyleBackColor = true;
+            buttonGetAllBooks.Click += buttonGetAllBooks_Click;
             // 
             // buttonUpdateBook
             // 
@@ -329,6 +331,7 @@
             buttonUpdateBook.TabIndex = 46;
             buttonUpdateBook.Text = "Opdater bog";
             buttonUpdateBook.UseVisualStyleBackColor = true;
+            buttonUpdateBook.Click += buttonUpdateBook_Click;
             // 
             // buttonDeleteBook
             // 
@@ -338,6 +341,7 @@
             buttonDeleteBook.TabIndex = 47;
             buttonDeleteBook.Text = "Slet bog";
             buttonDeleteBook.UseVisualStyleBackColor = true;
+            buttonDeleteBook.Click += buttonDeleteBook_Click;
             // 
             // buttonPicture
             // 
@@ -347,6 +351,7 @@
             buttonPicture.TabIndex = 48;
             buttonPicture.Text = "Vælg billedfil";
             buttonPicture.UseVisualStyleBackColor = true;
+            buttonPicture.Click += buttonPicture_Click;
             // 
             // ShowBooks
             // 
@@ -379,7 +384,7 @@
             Controls.Add(comboBox1);
             Controls.Add(textBox1);
             Controls.Add(BookList);
-            Controls.Add(listViewShowEmployees);
+            Controls.Add(listViewShowBooks);
             Controls.Add(buttonCloseWindow);
             ForeColor = SystemColors.ControlText;
             Name = "ShowBooks";
@@ -391,7 +396,7 @@
         #endregion
 
         private Button buttonCloseWindow;
-        private ListView listViewShowEmployees;
+        private ListView listViewShowBooks;
         private ColumnHeader Titel;
         private ColumnHeader Forfatter;
         private ColumnHeader SideAntal;

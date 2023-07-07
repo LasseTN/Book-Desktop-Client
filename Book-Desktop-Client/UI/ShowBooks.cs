@@ -26,5 +26,25 @@ namespace Book_Desktop_Client.UI {
         private void BookList_Click(object sender, EventArgs e) {
 
         }
+
+        private void buttonGetAllBooks_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonPicture_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonCreateBook_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonUpdateBook_Click(object sender, EventArgs e) {
+
+        }
+
+        private void buttonDeleteBook_Click(object sender, EventArgs e) {
+
+        }
     }
 }
