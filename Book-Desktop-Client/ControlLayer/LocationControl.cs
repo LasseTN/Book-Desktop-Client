@@ -26,7 +26,7 @@ namespace Book_Desktop_Client.ControlLayer {
             throw new NotImplementedException();
         }
 
-        public async Task<List<Location>?> GetAllLocation() {
+        public async Task<List<Location>?> GetAllLocations() {
             List<Location>? foundLocations = null;
             if (_locationServiceAccess != null) {
                 foundLocations = await _locationServiceAccess.GetAllLocations();

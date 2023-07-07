@@ -33,7 +33,7 @@ namespace Book_Desktop_Client.UI {
         private async Task UpdateList() {
             string processText = "Ok";
             listViewShowLocations.Items.Clear();
-            List<Location> locations = await _locationControl.GetAllLocation();
+            List<Location> locations = await _locationControl.GetAllLocations();
 
             if (locations.Count >= 1) {
 

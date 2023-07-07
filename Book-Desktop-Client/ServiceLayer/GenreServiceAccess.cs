@@ -60,6 +60,7 @@ namespace Book_Desktop_Client.ServiceLayer {
         }
 
         public async Task<List<Genre>?> GetAllGenres() {
+
             List<Genre>? genres = null;
             var temp1 = new List<Genre>();
 

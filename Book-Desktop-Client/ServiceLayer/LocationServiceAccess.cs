@@ -1,29 +1,28 @@
 ﻿using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
 using System.Net;
 using System.Text;
 
 namespace Book_Desktop_Client.ServiceLayer {
     public class LocationServiceAccess : ILocationAccess {
 
-        readonly IServiceConnection _connection;
+        readonly IServiceConnection _Connection;
         readonly string _ServiceBaseUrl = "https://localhost:7199/api/Location";
 
         public LocationServiceAccess() {
-            _connection = new ServiceConnection(_ServiceBaseUrl);
+            _Connection = new ServiceConnection(_ServiceBaseUrl);
         }
         public async Task<Location?> CreateLocation(Location locationToCreate) {
             Location? foundLocation = null;
 
-            _connection.UseUrl = _connection.BaseUrl;
+            _Connection.UseUrl = _Connection.BaseUrl;
 
             try {
                 var json = JsonConvert.SerializeObject(locationToCreate);
                 var postData = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage? response = await _connection.CallServicePost(postData);
+                HttpResponseMessage? response = await _Connection.CallServicePost(postData);
 
                 if (response != null && response.IsSuccessStatusCode) {
                     var content = await response.Content.ReadAsStringAsync();
@@ -39,30 +38,35 @@ namespace Book_Desktop_Client.ServiceLayer {
             throw new NotImplementedException();
         }
 
+
         public async Task<List<Location>?> GetAllLocations() {
+
             List<Location>? locations = null;
             var temp1 = new List<Location>();
 
-            if (_connection !=  null) {
-                _connection.UseUrl = _connection.BaseUrl;
+            if (_Connection != null) {
+                _Connection.UseUrl = _Connection.BaseUrl;
 
                 try {
-                    var serviceResponse = await _connection.CallServiceGet();
+                    var serviceResponse = await _Connection.CallServiceGet();
+
                     if (serviceResponse != null && serviceResponse.IsSuccessStatusCode) {
                         if (serviceResponse.StatusCode == HttpStatusCode.OK) {
                             var responseData = await serviceResponse!.Content.ReadAsStringAsync();
+                            if (locations == null) {
 
-                            temp1 = JsonConvert.DeserializeObject<List<Location>>(responseData);
-                            if (temp1 != null) {
-                                locations = new List<Location>();
-                            } else {
-
-                                if (serviceResponse != null && serviceResponse.StatusCode == HttpStatusCode.NotFound) {
+                                temp1 = JsonConvert.DeserializeObject<List<Location>>(responseData);
+                                if (temp1 != null) {
                                     locations = new List<Location>();
+                                } else {
+
+                                    if (serviceResponse != null && serviceResponse.StatusCode == HttpStatusCode.NotFound) {
+                                        locations = new List<Location>();
+                                    }
                                 }
+                            } else {
+                                locations = null;
                             }
-                        } else {
-                            locations = null;
                         }
                     }
                 } catch (Exception ex) {
@@ -72,6 +76,7 @@ namespace Book_Desktop_Client.ServiceLayer {
             }
             return temp1;
         }
+
 
         public Task<bool> UpdateChoosenLocationById(int id, Location locationToUpdate) {
             throw new NotImplementedException();
