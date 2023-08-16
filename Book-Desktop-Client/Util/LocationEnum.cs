@@ -9,6 +9,7 @@ namespace Book_Desktop_Client.Util {
         Nibe,
         Skørping,
         Søborg,
-        Aalborg
+        Aalborg,
+        Odense
     }
 }

@@ -2,7 +2,6 @@
 using Book_Desktop_Client.ControlLayer.Interfaces;
 using Book_Desktop_Client.Util;
 using Model;
-using System.Windows.Forms.VisualStyles;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
@@ -26,16 +25,17 @@ namespace Book_Desktop_Client.UI {
             // Genre
             comboBoxGenre.DataSource = Enum.GetValues(typeof(GenreEnum));
 
+            // Location
+            comboBoxLocation.DataSource = Enum.GetValues(typeof(LocationEnum));
+
             // Type
             comboBoxType.DataSource = Enum.GetValues(typeof(BookTypeEnum));
-            BookTypeEnum bookType = (BookTypeEnum)comboBoxType.SelectedIndex;
+            BookTypeEnum bookType = (BookTypeEnum)comboBoxType.SelectedItem;
 
             // Status
             comboBoxStatus.DataSource = Enum.GetValues(typeof(StatusEnum));
-            StatusEnum bookStatus = (StatusEnum)comboBoxType.SelectedIndex;
-            
-            // Location
-            comboBoxLocation.DataSource = Enum.GetValues(typeof(LocationEnum));
+            StatusEnum bookStatus = (StatusEnum)comboBoxStatus.SelectedItem;
+
         }
 
 
@@ -95,7 +95,7 @@ namespace Book_Desktop_Client.UI {
 
                 textBoxTitle.Text = item.SubItems[0].Text;
                 textBoxAuthor.Text = item.SubItems[1].Text;
-                comboBoxGenre.Text = item.SubItems[2].Text;
+                comboBoxGenre.Text = item.SubItems[2].Text ?? string.Empty;
                 textBoxNoOfPages.Text = item.SubItems[3].Text;
                 comboBoxType.Text = item.SubItems[4].Text;
                 textBoxIsbnNo.Text = item.SubItems[5].Text;
@@ -114,17 +114,17 @@ namespace Book_Desktop_Client.UI {
 
         private async void buttonCreateBook_Click(object sender, EventArgs e) {
 
-            Book? createdBook = null;
+            Book? createdBook = new Book();
             labelProcessText.Text = "Arbejder på sagen...";
 
             createdBook.Title = textBoxTitle.Text;
             createdBook.Author = textBoxAuthor.Text;
             createdBook.Genre = (Genre)comboBoxGenre.SelectedItem;
             createdBook.NoOfPages = int.Parse(textBoxNoOfPages.Text);
-            createdBook.BookType = comboBoxType.SelectedValue.ToString();
+            createdBook.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
             createdBook.IsbnNo = textBoxIsbnNo.Text;
             createdBook.Location = (Location)comboBoxLocation.SelectedItem;
-            createdBook.Status = comboBoxStatus.SelectedValue.ToString();
+            createdBook.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
             createdBook.BookId = int.Parse(textBoxId.Text);
 
             createdBook = await _bookControl.CreateNewBook(createdBook);
