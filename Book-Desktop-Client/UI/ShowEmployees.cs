@@ -117,7 +117,7 @@ namespace Book_Desktop_Client.UI {
             string mobil = textBoxMobil.Text;
             string email = textBoxEmail.Text;
             DateTime birthDate = dateTimePickerEmployee.Value;
-            
+
 
             if (idRaw != 0 && !string.IsNullOrEmpty(firstName) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(address) && !string.IsNullOrEmpty(mobil) && !string.IsNullOrEmpty(email)) {
                 // Call service to POST

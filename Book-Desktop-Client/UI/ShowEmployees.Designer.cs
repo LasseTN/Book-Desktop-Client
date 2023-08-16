@@ -144,9 +144,9 @@
             lblLastName.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblLastName.Location = new Point(880, 147);
             lblLastName.Name = "lblLastName";
-            lblLastName.Size = new Size(58, 17);
+            lblLastName.Size = new Size(67, 17);
             lblLastName.TabIndex = 7;
-            lblLastName.Text = "Fornavn";
+            lblLastName.Text = "Efternavn";
             // 
             // textBoxLastName
             // 

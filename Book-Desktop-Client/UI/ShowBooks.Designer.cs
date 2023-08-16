@@ -59,14 +59,16 @@
             buttonUpdateBook = new Button();
             buttonDeleteBook = new Button();
             buttonPicture = new Button();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            labelProcessText = new Label();
             SuspendLayout();
             // 
             // buttonCloseWindow
             // 
             buttonCloseWindow.BackColor = Color.Salmon;
-            buttonCloseWindow.Location = new Point(1285, 665);
+            buttonCloseWindow.Location = new Point(1259, 665);
             buttonCloseWindow.Name = "buttonCloseWindow";
-            buttonCloseWindow.Size = new Size(95, 23);
+            buttonCloseWindow.Size = new Size(121, 26);
             buttonCloseWindow.TabIndex = 22;
             buttonCloseWindow.Text = "Luk vinduet";
             buttonCloseWindow.UseVisualStyleBackColor = false;
@@ -83,6 +85,7 @@
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
+            listViewShowBooks.SelectedIndexChanged += listViewShowBooks_SelectedIndexChanged;
             // 
             // Titel
             // 
@@ -134,7 +137,7 @@
             BookList.Size = new Size(108, 17);
             BookList.TabIndex = 24;
             BookList.Text = "Liste over bøger";
-            BookList.Click += BookList_Click;
+
             // 
             // textBox1
             // 
@@ -311,7 +314,6 @@
             buttonCreateBook.TabIndex = 44;
             buttonCreateBook.Text = "Tilføj bog";
             buttonCreateBook.UseVisualStyleBackColor = true;
-            buttonCreateBook.Click += buttonCreateBook_Click;
             // 
             // buttonGetAllBooks
             // 
@@ -331,7 +333,6 @@
             buttonUpdateBook.TabIndex = 46;
             buttonUpdateBook.Text = "Opdater bog";
             buttonUpdateBook.UseVisualStyleBackColor = true;
-            buttonUpdateBook.Click += buttonUpdateBook_Click;
             // 
             // buttonDeleteBook
             // 
@@ -341,17 +342,31 @@
             buttonDeleteBook.TabIndex = 47;
             buttonDeleteBook.Text = "Slet bog";
             buttonDeleteBook.UseVisualStyleBackColor = true;
-            buttonDeleteBook.Click += buttonDeleteBook_Click;
             // 
             // buttonPicture
             // 
-            buttonPicture.Location = new Point(763, 610);
+            buttonPicture.Location = new Point(1159, 367);
             buttonPicture.Name = "buttonPicture";
             buttonPicture.Size = new Size(121, 34);
             buttonPicture.TabIndex = 48;
             buttonPicture.Text = "Vælg billedfil";
             buttonPicture.UseVisualStyleBackColor = true;
-            buttonPicture.Click += buttonPicture_Click;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Location = new Point(1159, 93);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(221, 251);
+            flowLayoutPanel1.TabIndex = 49;
+            // 
+            // labelProcessText
+            // 
+            labelProcessText.AutoSize = true;
+            labelProcessText.Location = new Point(59, 670);
+            labelProcessText.Name = "labelProcessText";
+            labelProcessText.Size = new Size(16, 15);
+            labelProcessText.TabIndex = 50;
+            labelProcessText.Text = "...";
             // 
             // ShowBooks
             // 
@@ -359,6 +374,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(1453, 718);
+            Controls.Add(labelProcessText);
+            Controls.Add(flowLayoutPanel1);
             Controls.Add(buttonPicture);
             Controls.Add(buttonDeleteBook);
             Controls.Add(buttonUpdateBook);
@@ -389,6 +406,7 @@
             ForeColor = SystemColors.ControlText;
             Name = "ShowBooks";
             Text = "ShowBooks";
+            Load += ShowBooks_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -431,5 +449,7 @@
         private Button buttonUpdateBook;
         private Button buttonDeleteBook;
         private Button buttonPicture;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Label labelProcessText;
     }
 }
