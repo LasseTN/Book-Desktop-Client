@@ -44,7 +44,7 @@ namespace Book_Desktop_Client.UI {
                         b.Author,
                         b.Genre.GenreName,
                         b.NoOfPages.ToString(),
-                        b.BookType.ToString(),
+                        b.BookType,
                         b.IsbnNo,
                         b.Location.LocationName,
                         b.Status,
@@ -67,9 +67,9 @@ namespace Book_Desktop_Client.UI {
 
                 textBoxTitle.Text = item.SubItems[0].Text;
                 textBoxAuthor.Text = item.SubItems[1].Text;
-                comboBoxGenre.Text = item.SubItems[4].Text;
+                comboBoxGenre.Text = item.SubItems[2].Text;
                 textBoxNoOfPages.Text = item.SubItems[3].Text;
-                comboBoxType.Text = item.SubItems[2].Text;
+                comboBoxType.Text = item.SubItems[4].Text;
                 textBoxIsbnNo.Text = item.SubItems[5].Text;
                 comboBoxLocation.Text = item.SubItems[6].Text;
                 comboBoxStatus.Text = item.SubItems[7].Text;

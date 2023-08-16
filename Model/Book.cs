@@ -4,11 +4,11 @@ namespace Model {
         public int BookId { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
-        public Genre Genre { get; set; }
+        public Genre? Genre { get; set; }
         public int NoOfPages { get; set; }
         public string BookType { get; set; }
         public string IsbnNo { get; set; }
-        public Location Location { get; set; }
+        public Location? Location { get; set; }
         public string Status { get; set; }
         public List<string>? BookImagesPath { get; set; }
 
