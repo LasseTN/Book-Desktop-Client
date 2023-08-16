@@ -9,6 +9,7 @@ namespace Book_Desktop_Client.UI {
 
         private List<Book> _booksToShowList;
         private List<Genre> _genreList;
+        private List<Type> _typeList;
         private List<Location> _locationList;
 
         private readonly IBookControl _bookControl;
@@ -24,6 +25,8 @@ namespace Book_Desktop_Client.UI {
             _bookControl = new BookControl();
 
             comboBoxGenre.DataSource = Enum.GetValues(typeof(GenreEnum));
+            //comboBoxGenre.DataSource = Enum.GetValues(typeof(BookTypeEnum));
+            comboBoxLocation.DataSource = Enum.GetValues(typeof(LocationEnum));
         }
         private void ShowBooks_Load(object sender, EventArgs e) {
 
