@@ -35,15 +35,15 @@
             Status = new ColumnHeader();
             bogId = new ColumnHeader();
             BookList = new Label();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            comboBox2 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
+            textBoxTitle = new TextBox();
+            comboBoxType = new ComboBox();
+            comboBoxGenre = new ComboBox();
+            comboBoxLocation = new ComboBox();
+            comboBoxStatus = new ComboBox();
+            textBoxAuthor = new TextBox();
+            textBoxNoOfPages = new TextBox();
+            textBoxIsbnNo = new TextBox();
+            textBoxId = new TextBox();
             lblTitle = new Label();
             lblAuthor = new Label();
             lblGenre = new Label();
@@ -66,7 +66,7 @@
             // buttonCloseWindow
             // 
             buttonCloseWindow.BackColor = Color.Salmon;
-            buttonCloseWindow.Location = new Point(1259, 665);
+            buttonCloseWindow.Location = new Point(1443, 659);
             buttonCloseWindow.Name = "buttonCloseWindow";
             buttonCloseWindow.Size = new Size(121, 26);
             buttonCloseWindow.TabIndex = 22;
@@ -137,74 +137,73 @@
             BookList.Size = new Size(108, 17);
             BookList.TabIndex = 24;
             BookList.Text = "Liste over bøger";
-
             // 
-            // textBox1
+            // textBoxTitle
             // 
-            textBox1.Location = new Point(984, 93);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(121, 23);
-            textBox1.TabIndex = 25;
+            textBoxTitle.Location = new Point(984, 93);
+            textBoxTitle.Name = "textBoxTitle";
+            textBoxTitle.Size = new Size(262, 23);
+            textBoxTitle.TabIndex = 25;
             // 
-            // comboBox1
+            // comboBoxType
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(984, 321);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 26;
+            comboBoxType.FormattingEnabled = true;
+            comboBoxType.Location = new Point(984, 321);
+            comboBoxType.Name = "comboBoxType";
+            comboBoxType.Size = new Size(179, 23);
+            comboBoxType.TabIndex = 26;
             // 
-            // comboBox2
+            // comboBoxGenre
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(984, 206);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 27;
+            comboBoxGenre.FormattingEnabled = true;
+            comboBoxGenre.Location = new Point(984, 206);
+            comboBoxGenre.Name = "comboBoxGenre";
+            comboBoxGenre.Size = new Size(179, 23);
+            comboBoxGenre.TabIndex = 27;
             // 
-            // comboBox3
+            // comboBoxLocation
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(984, 439);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(121, 23);
-            comboBox3.TabIndex = 28;
+            comboBoxLocation.FormattingEnabled = true;
+            comboBoxLocation.Location = new Point(984, 439);
+            comboBoxLocation.Name = "comboBoxLocation";
+            comboBoxLocation.Size = new Size(179, 23);
+            comboBoxLocation.TabIndex = 28;
             // 
-            // comboBox4
+            // comboBoxStatus
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(984, 497);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(121, 23);
-            comboBox4.TabIndex = 29;
+            comboBoxStatus.FormattingEnabled = true;
+            comboBoxStatus.Location = new Point(984, 497);
+            comboBoxStatus.Name = "comboBoxStatus";
+            comboBoxStatus.Size = new Size(179, 23);
+            comboBoxStatus.TabIndex = 29;
             // 
-            // textBox2
+            // textBoxAuthor
             // 
-            textBox2.Location = new Point(984, 149);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(121, 23);
-            textBox2.TabIndex = 30;
+            textBoxAuthor.Location = new Point(984, 149);
+            textBoxAuthor.Name = "textBoxAuthor";
+            textBoxAuthor.Size = new Size(262, 23);
+            textBoxAuthor.TabIndex = 30;
             // 
-            // textBox3
+            // textBoxNoOfPages
             // 
-            textBox3.Location = new Point(984, 262);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(121, 23);
-            textBox3.TabIndex = 31;
+            textBoxNoOfPages.Location = new Point(984, 262);
+            textBoxNoOfPages.Name = "textBoxNoOfPages";
+            textBoxNoOfPages.Size = new Size(179, 23);
+            textBoxNoOfPages.TabIndex = 31;
             // 
-            // textBox4
+            // textBoxIsbnNo
             // 
-            textBox4.Location = new Point(984, 378);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(121, 23);
-            textBox4.TabIndex = 32;
+            textBoxIsbnNo.Location = new Point(984, 378);
+            textBoxIsbnNo.Name = "textBoxIsbnNo";
+            textBoxIsbnNo.Size = new Size(179, 23);
+            textBoxIsbnNo.TabIndex = 32;
             // 
-            // textBox5
+            // textBoxId
             // 
-            textBox5.Location = new Point(984, 557);
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(121, 23);
-            textBox5.TabIndex = 33;
+            textBoxId.Location = new Point(984, 557);
+            textBoxId.Name = "textBoxId";
+            textBoxId.Size = new Size(179, 23);
+            textBoxId.TabIndex = 33;
             // 
             // lblTitle
             // 
@@ -308,7 +307,7 @@
             // 
             // buttonCreateBook
             // 
-            buttonCreateBook.Location = new Point(984, 610);
+            buttonCreateBook.Location = new Point(1168, 604);
             buttonCreateBook.Name = "buttonCreateBook";
             buttonCreateBook.Size = new Size(121, 34);
             buttonCreateBook.TabIndex = 44;
@@ -327,7 +326,7 @@
             // 
             // buttonUpdateBook
             // 
-            buttonUpdateBook.Location = new Point(1126, 610);
+            buttonUpdateBook.Location = new Point(1310, 604);
             buttonUpdateBook.Name = "buttonUpdateBook";
             buttonUpdateBook.Size = new Size(121, 34);
             buttonUpdateBook.TabIndex = 46;
@@ -336,7 +335,7 @@
             // 
             // buttonDeleteBook
             // 
-            buttonDeleteBook.Location = new Point(1259, 610);
+            buttonDeleteBook.Location = new Point(1443, 604);
             buttonDeleteBook.Name = "buttonDeleteBook";
             buttonDeleteBook.Size = new Size(121, 34);
             buttonDeleteBook.TabIndex = 47;
@@ -345,7 +344,7 @@
             // 
             // buttonPicture
             // 
-            buttonPicture.Location = new Point(1159, 367);
+            buttonPicture.Location = new Point(1343, 361);
             buttonPicture.Name = "buttonPicture";
             buttonPicture.Size = new Size(121, 34);
             buttonPicture.TabIndex = 48;
@@ -354,7 +353,7 @@
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.Location = new Point(1159, 93);
+            flowLayoutPanel1.Location = new Point(1343, 87);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(221, 251);
             flowLayoutPanel1.TabIndex = 49;
@@ -373,7 +372,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
-            ClientSize = new Size(1453, 718);
+            ClientSize = new Size(1655, 787);
             Controls.Add(labelProcessText);
             Controls.Add(flowLayoutPanel1);
             Controls.Add(buttonPicture);
@@ -391,15 +390,15 @@
             Controls.Add(lblGenre);
             Controls.Add(lblAuthor);
             Controls.Add(lblTitle);
-            Controls.Add(textBox5);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(comboBox4);
-            Controls.Add(comboBox3);
-            Controls.Add(comboBox2);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxId);
+            Controls.Add(textBoxIsbnNo);
+            Controls.Add(textBoxNoOfPages);
+            Controls.Add(textBoxAuthor);
+            Controls.Add(comboBoxStatus);
+            Controls.Add(comboBoxLocation);
+            Controls.Add(comboBoxGenre);
+            Controls.Add(comboBoxType);
+            Controls.Add(textBoxTitle);
             Controls.Add(BookList);
             Controls.Add(listViewShowBooks);
             Controls.Add(buttonCloseWindow);
@@ -425,15 +424,15 @@
         private ColumnHeader bogId;
         private ColumnHeader Genre;
         private ColumnHeader Lokation;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
-        private TextBox textBox5;
+        private TextBox textBoxTitle;
+        private ComboBox comboBoxType;
+        private ComboBox comboBoxGenre;
+        private ComboBox comboBoxLocation;
+        private ComboBox comboBoxStatus;
+        private TextBox textBoxAuthor;
+        private TextBox textBoxNoOfPages;
+        private TextBox textBoxIsbnNo;
+        private TextBox textBoxId;
         private Label lblTitle;
         private Label lblAuthor;
         private Label lblGenre;

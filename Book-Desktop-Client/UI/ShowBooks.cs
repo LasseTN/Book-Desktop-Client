@@ -39,8 +39,7 @@ namespace Book_Desktop_Client.UI {
             } else {
                 foreach (Book b in _booksToShowList) {
                     string[] details = {
-                        
-                        
+
                         b.Title,
                         b.Author,
                         b.Genre.GenreName,
@@ -50,7 +49,6 @@ namespace Book_Desktop_Client.UI {
                         b.Location.LocationName,
                         b.Status,
                         b.BookId.ToString() ?? "Fejl",
-                        //b.BookImagesPath != null ? $"{b.BookImagesPath.Count().ToString()} stk." : "ingen",
 
 
                     };
@@ -62,17 +60,23 @@ namespace Book_Desktop_Client.UI {
         }
 
         private void listViewShowBooks_SelectedIndexChanged(object sender, EventArgs e) {
+            string processText = "Bog id ";
+
             if (listViewShowBooks.SelectedItems.Count > 0) {
+                ListViewItem item = listViewShowBooks.SelectedItems[0];
 
-                if (listViewShowBooks.SelectedItems.Count > 0) {
-                    string text = listViewShowBooks.SelectedItems[0].Text;
+                textBoxTitle.Text = item.SubItems[0].Text;
+                textBoxAuthor.Text = item.SubItems[1].Text;
+                comboBoxGenre.Text = item.SubItems[4].Text;
+                textBoxNoOfPages.Text = item.SubItems[3].Text;
+                comboBoxType.Text = item.SubItems[2].Text;
+                textBoxIsbnNo.Text = item.SubItems[5].Text;
+                comboBoxLocation.Text = item.SubItems[6].Text;
+                comboBoxStatus.Text = item.SubItems[7].Text;
+                textBoxId.Text = item.SubItems[8].Text;
+                labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[8].Text;
 
-                    int value = int.Parse(text);
 
-                    Book selectedBook = _booksToShowList.Find(book => book.BookId == value);
-
-                    // UpdateBook(selectedBook);
-                }
             }
         }
 
@@ -102,12 +106,6 @@ namespace Book_Desktop_Client.UI {
         }
 
 
-        //private void UpdateBook(Book? bookToUpdate) {
-        //    var bookToUpdatePage = new UpdateBook(bookToUpdate);
-        //    this.Hide();
-        //    bookToUpdate.Show();
-        //    this.Show();
-        //}
     }
 }
 
