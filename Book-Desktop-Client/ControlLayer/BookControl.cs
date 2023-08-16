@@ -2,12 +2,8 @@
 using Book_Desktop_Client.ServiceLayer;
 using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Book_Desktop_Client.ControlLayer {
     public class BookControl : IBookControl {
@@ -18,8 +14,14 @@ namespace Book_Desktop_Client.ControlLayer {
             _bookAccess = new BookServiceAccess();            
         }
 
-        public Task<Book>? CreateNewBook(Book bookToCreate) {
-            throw new NotImplementedException();
+        public async Task<Book>? CreateNewBook(Book bookToCreate) {
+            Book? createdBook;
+            try {
+                createdBook = await _bookAccess.CreatedBook(bookToCreate);
+            } catch (Exception ex) {
+                createdBook = null;
+            }
+            return createdBook;
         }
 
         public async Task<List<Book>?> GetAllBooks() {

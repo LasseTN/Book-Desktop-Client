@@ -1,12 +1,8 @@
 ﻿using Book_Desktop_Client.ServiceLayer.Interfaces;
 using Model;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Book_Desktop_Client.ServiceLayer {
     public class BookServiceAccess : IbookAccess {
@@ -18,8 +14,25 @@ namespace Book_Desktop_Client.ServiceLayer {
         }
         public HttpStatusCode CurrentHttpStatusCode { get; set; }
 
-        public Task<Book?> CreatedBook(Book bookToCreate) {
-            throw new NotImplementedException();
+        public async Task<Book?> CreatedBook(Book bookToCreate) {
+            Book? foundBook = null;
+
+            _Connection.UseUrl = _Connection.BaseUrl;
+
+            try {
+                var json = JsonConvert.SerializeObject(bookToCreate);
+                var postData = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage? response = await _Connection.CallServicePost(postData);
+
+                if (response != null && response.IsSuccessStatusCode) {
+                    var content = await response.Content.ReadAsStringAsync();
+                    foundBook = JsonConvert.DeserializeObject<Book>(content);
+                }
+            } catch (Exception) {
+                throw;
+            }
+            return foundBook;
         }
 
         public async Task<List<Book>?> GetAllBooks() {

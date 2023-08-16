@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book-Desktop-Client", "Book-Desktop-Client\Book-Desktop-Client.csproj", "{C644CB46-D9B4-4A2C-ACB2-6003D1F9F8B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book-Desktop-Client", "Book-Desktop-Client\Book-Desktop-Client.csproj", "{C644CB46-D9B4-4A2C-ACB2-6003D1F9F8B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{4B01AEBE-B1B3-4F7F-8822-87028D03DDF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{4B01AEBE-B1B3-4F7F-8822-87028D03DDF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{147A7009-8B45-4069-9EB4-AE2F6EEEE4A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Util", "Util\Util.csproj", "{147A7009-8B45-4069-9EB4-AE2F6EEEE4A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,15 +1,29 @@
 ﻿using Book_Desktop_Client.ControlLayer;
 using Book_Desktop_Client.ControlLayer.Interfaces;
+using Book_Desktop_Client.Util;
 using Model;
+using System.Windows.Forms.VisualStyles;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
-        readonly IBookControl _bookControl;
         private List<Book> _booksToShowList;
+        private List<Genre> _genreList;
+        private List<Location> _locationList;
+
+        private readonly IBookControl _bookControl;
+        private readonly IGenreControl _genreControl;
+        private readonly ILocationControl _locationControl;
         public ShowBooks() {
+            _booksToShowList = new List<Book>();
+            _genreControl = new GenreControl();
+            _locationList = new List<Location>();
+
+
             InitializeComponent();
             _bookControl = new BookControl();
+
+            comboBoxGenre.DataSource = Enum.GetValues(typeof(GenreEnum));
         }
         private void ShowBooks_Load(object sender, EventArgs e) {
 
@@ -84,7 +98,27 @@ namespace Book_Desktop_Client.UI {
 
         }
 
-        private void buttonCreateBook_Click(object sender, EventArgs e) {
+        private async void buttonCreateBook_Click(object sender, EventArgs e) {
+
+            Book? createdBook = null;
+            labelProcessText.Text = "Arbejder på sagen...";
+
+            createdBook.Title = textBoxTitle.Text;
+            createdBook.Author = textBoxAuthor.Text;
+            createdBook.Genre = (Genre)comboBoxGenre.SelectedItem;
+            createdBook.NoOfPages = int.Parse(textBoxNoOfPages.Text);
+            createdBook.BookType = (string)comboBoxType.SelectedItem;
+            createdBook.IsbnNo = textBoxIsbnNo.Text;
+            createdBook.Location = (Location)comboBoxLocation.SelectedItem;
+            createdBook.Status = (string)comboBoxStatus.SelectedItem;
+            createdBook.BookId = int.Parse(textBoxId.Text);
+
+            createdBook = await _bookControl.CreateNewBook(createdBook);
+            if (createdBook != null) {
+                labelProcessText.Text = "Bogen er oprettet";
+                MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
+                this.Close();
+            }
 
         }
 
