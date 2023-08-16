@@ -8,7 +8,7 @@ namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
         private List<Book> _booksToShowList;
-        private List<Genre> _genreList;
+        private List<Genre>? _genreList;
         private List<Type> _typeList;
         private List<Location> _locationList;
 
@@ -20,14 +20,25 @@ namespace Book_Desktop_Client.UI {
             _genreControl = new GenreControl();
             _locationList = new List<Location>();
 
-
             InitializeComponent();
             _bookControl = new BookControl();
 
+            // Genre
             comboBoxGenre.DataSource = Enum.GetValues(typeof(GenreEnum));
-            //comboBoxGenre.DataSource = Enum.GetValues(typeof(BookTypeEnum));
+
+            // Type
+            comboBoxType.DataSource = Enum.GetValues(typeof(BookTypeEnum));
+            BookTypeEnum bookType = (BookTypeEnum)comboBoxType.SelectedIndex;
+
+            // Status
+            comboBoxStatus.DataSource = Enum.GetValues(typeof(StatusEnum));
+            StatusEnum bookStatus = (StatusEnum)comboBoxType.SelectedIndex;
+            
+            // Location
             comboBoxLocation.DataSource = Enum.GetValues(typeof(LocationEnum));
         }
+
+
         private void ShowBooks_Load(object sender, EventArgs e) {
 
         }
@@ -110,10 +121,10 @@ namespace Book_Desktop_Client.UI {
             createdBook.Author = textBoxAuthor.Text;
             createdBook.Genre = (Genre)comboBoxGenre.SelectedItem;
             createdBook.NoOfPages = int.Parse(textBoxNoOfPages.Text);
-            createdBook.BookType = (string)comboBoxType.SelectedItem;
+            createdBook.BookType = comboBoxType.SelectedValue.ToString();
             createdBook.IsbnNo = textBoxIsbnNo.Text;
             createdBook.Location = (Location)comboBoxLocation.SelectedItem;
-            createdBook.Status = (string)comboBoxStatus.SelectedItem;
+            createdBook.Status = comboBoxStatus.SelectedValue.ToString();
             createdBook.BookId = int.Parse(textBoxId.Text);
 
             createdBook = await _bookControl.CreateNewBook(createdBook);
