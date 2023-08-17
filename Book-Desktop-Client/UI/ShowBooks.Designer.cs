@@ -316,6 +316,7 @@
             buttonCreateBook.TabIndex = 44;
             buttonCreateBook.Text = "Tilføj bog";
             buttonCreateBook.UseVisualStyleBackColor = true;
+            buttonCreateBook.Click += buttonCreateBook_Click;
             // 
             // buttonGetAllBooks
             // 

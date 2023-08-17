@@ -114,27 +114,43 @@ namespace Book_Desktop_Client.UI {
 
         private async void buttonCreateBook_Click(object sender, EventArgs e) {
 
-            Book? createdBook = new Book();
+            Book tocreate = new Book();
+            Book? createdBook = null;
+
             labelProcessText.Text = "Arbejder på sagen...";
 
-            createdBook.Title = textBoxTitle.Text;
-            createdBook.Author = textBoxAuthor.Text;
-            createdBook.Genre = (Genre)comboBoxGenre.SelectedItem;
-            createdBook.NoOfPages = int.Parse(textBoxNoOfPages.Text);
-            createdBook.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
-            createdBook.IsbnNo = textBoxIsbnNo.Text;
-            createdBook.Location = (Location)comboBoxLocation.SelectedItem;
-            createdBook.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
-            createdBook.BookId = int.Parse(textBoxId.Text);
+            tocreate.Title = textBoxTitle.Text;
+            tocreate.Author = textBoxAuthor.Text;
+            
+            GenreEnum selectedGenreEnum = (GenreEnum)comboBoxGenre.SelectedItem;
+            Genre selectedGenre = new Genre { GenreName = selectedGenreEnum.ToString() };
+            tocreate.Genre = selectedGenre;
+           
+            tocreate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
 
-            createdBook = await _bookControl.CreateNewBook(createdBook);
+            tocreate.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
+            tocreate.IsbnNo = textBoxIsbnNo.Text;
+            
+            LocationEnum selectedLoactionEnum = (LocationEnum)comboBoxLocation.SelectedItem;
+            Location selectedLocation = new Location { LocationName = selectedLoactionEnum.ToString() };
+            tocreate.Location = selectedLocation;
+            
+            tocreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
+
+
+
+
+
+            createdBook = await _bookControl.CreateNewBook(tocreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
                 MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
                 this.Close();
             }
-
         }
+
+
+
 
         private void buttonUpdateBook_Click(object sender, EventArgs e) {
 
