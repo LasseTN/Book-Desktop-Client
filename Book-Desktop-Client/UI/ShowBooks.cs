@@ -137,10 +137,6 @@ namespace Book_Desktop_Client.UI {
             
             tocreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
 
-
-
-
-
             createdBook = await _bookControl.CreateNewBook(tocreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
