@@ -8,6 +8,7 @@ namespace Book_Desktop_Client.Util {
     public enum StatusEnum {
         Læst,
         Ulæst,
+        Uafsluttet,
         Igangværende
     }
 }

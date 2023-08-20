@@ -71,12 +71,12 @@
             // FirstName
             // 
             FirstName.Text = "Fornavn";
-            FirstName.Width = 80;
+            FirstName.Width = 100;
             // 
             // LastName
             // 
             LastName.Text = "Efternavn";
-            LastName.Width = 100;
+            LastName.Width = 150;
             // 
             // Address
             // 
@@ -96,7 +96,7 @@
             // Birthdate
             // 
             Birthdate.Text = "Fødselsdato";
-            Birthdate.Width = 70;
+            Birthdate.Width = 80;
             // 
             // Id
             // 

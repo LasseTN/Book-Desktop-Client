@@ -121,20 +121,20 @@ namespace Book_Desktop_Client.UI {
 
             tocreate.Title = textBoxTitle.Text;
             tocreate.Author = textBoxAuthor.Text;
-            
+
             GenreEnum selectedGenreEnum = (GenreEnum)comboBoxGenre.SelectedItem;
             Genre selectedGenre = new Genre { GenreName = selectedGenreEnum.ToString() };
             tocreate.Genre = selectedGenre;
-           
+
             tocreate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
 
             tocreate.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
             tocreate.IsbnNo = textBoxIsbnNo.Text;
-            
+
             LocationEnum selectedLoactionEnum = (LocationEnum)comboBoxLocation.SelectedItem;
             Location selectedLocation = new Location { LocationName = selectedLoactionEnum.ToString() };
             tocreate.Location = selectedLocation;
-            
+
             tocreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
 
             Book createBook = new Book(-1, tocreate.Title, tocreate.Author, tocreate.Genre, tocreate.NoOfPages, tocreate.BookType, tocreate.IsbnNo, tocreate.Location, tocreate.Status);
