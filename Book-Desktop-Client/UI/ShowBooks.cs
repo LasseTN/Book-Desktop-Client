@@ -210,14 +210,8 @@ namespace Book_Desktop_Client.UI {
                     comboBoxGenre.Show();
                 }
 
-                //    comboBoxGenre.DataSource = _genreList;
-                //    comboBoxGenre.DisplayMember = "GenreName";
-                //    comboBoxGenre.ValueMember = "GenreId";
             }
 
-
-
-            //comboBoxGenre.SelectedIndex = (int) GenreEnum.Roman;
         }
 
         private async void comboBoxLocation_SelectedIndexChanged(object sender, EventArgs e) {
