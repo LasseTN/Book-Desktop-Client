@@ -173,6 +173,7 @@
             comboBoxLocation.Name = "comboBoxLocation";
             comboBoxLocation.Size = new Size(179, 23);
             comboBoxLocation.TabIndex = 28;
+            comboBoxLocation.SelectedIndexChanged += comboBoxLocation_SelectedIndexChanged;
             // 
             // comboBoxStatus
             // 

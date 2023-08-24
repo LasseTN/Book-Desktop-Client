@@ -65,7 +65,6 @@ namespace Book_Desktop_Client.ServiceLayer {
             var temp1 = new List<Genre>();
 
             if (_Connection != null) {
-                _Connection.UseUrl = _Connection.BaseUrl;
 
                 try {
                     var serviceResponse = await _Connection.CallServiceGet();

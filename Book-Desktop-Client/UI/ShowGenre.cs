@@ -6,6 +6,9 @@ using Model;
 namespace Book_Desktop_Client.UI {
     public partial class ShowGenre : Form {
         private readonly IGenreControl _genreControl;
+        private List<Genre> _genreList;
+        private int? genreId;
+
         public ShowGenre() {
             InitializeComponent();
 
@@ -35,23 +38,30 @@ namespace Book_Desktop_Client.UI {
             await UpdateProcessText();
         }
 
-        private async Task UpdateList() {
-            string processText = "Ok";
+        public async Task UpdateList() {
+
+            string processText = "";
+            labelProcessText.Text = processText;
             listViewShowGenres.Items.Clear();
-            List<Genre> genres = await _genreControl.GetAllGenres();
+            _genreList = await _genreControl.GetAllGenres();
 
-            if (genres != null) {
+            if (_genreList != null) {
 
-                if (genres.Count >= 1) {
+                if (_genreList.Count >= 1) {
 
                     processText = "Genrer blev opdateret";
 
-                } else {
+                } else if (_genreList.Count < 1) {
                     processText = "Ingen genrere fundet";
                 }
 
-                foreach (Genre genre in genres) {
-                    string[] details = { genre.GenreName, genre.GenreId.ToString() };
+                foreach (Genre genre in _genreList) {
+                    string[] details = 
+                        
+                    { 
+                    genre.GenreId.ToString() ?? "Intet" 
+                    };
+
                     ListViewItem genreDetails = new ListViewItem(details);
                     listViewShowGenres.Items.Add(genreDetails);
                 }
