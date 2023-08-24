@@ -20,10 +20,12 @@ namespace Book_Desktop_Client.UI {
             _locationList = new List<Location>();
 
             InitializeComponent();
+            //InitializeComboBox();
             _bookControl = new BookControl();
 
             // Genre
             comboBoxGenre.DataSource = Enum.GetValues(typeof(GenreEnum));
+
 
             // Location
             comboBoxLocation.DataSource = Enum.GetValues(typeof(LocationEnum));
@@ -37,6 +39,7 @@ namespace Book_Desktop_Client.UI {
             StatusEnum bookStatus = (StatusEnum)comboBoxStatus.SelectedItem;
 
         }
+
 
 
         private void ShowBooks_Load(object sender, EventArgs e) {
@@ -166,7 +169,11 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
+        private void comboBoxGenre_SelectedIndexChanged(object sender, EventArgs e) {
+            comboBoxGenre.DataSource = (Enum.GetNames(typeof(GenreEnum)));
 
+            comboBoxGenre.SelectedIndex = (int) GenreEnum.Roman;
+        }
     }
 }
 

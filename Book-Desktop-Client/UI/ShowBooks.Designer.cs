@@ -164,6 +164,7 @@
             comboBoxGenre.Name = "comboBoxGenre";
             comboBoxGenre.Size = new Size(179, 23);
             comboBoxGenre.TabIndex = 27;
+            comboBoxGenre.SelectedIndexChanged += comboBoxGenre_SelectedIndexChanged;
             // 
             // comboBoxLocation
             // 
