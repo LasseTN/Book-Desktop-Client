@@ -169,11 +169,11 @@ namespace Book_Desktop_Client.UI {
 
             toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
 
-            Book createBook = new Book(-1, toCreate.Title, toCreate.Author, toCreate.Genre, toCreate.NoOfPages, toCreate.BookType, toCreate.IsbnNo, toCreate.Location, toCreate.Status);
-            createdBook = await _bookControl.CreateNewBook(createBook);
+            createdBook = new Book(-1, toCreate.Title, toCreate.Author, toCreate.Genre, toCreate.NoOfPages, toCreate.BookType, toCreate.IsbnNo, toCreate.Location, toCreate.Status);
+            createdBook = await _bookControl.CreateNewBook(toCreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
-                MessageBox.Show($"Du har nu oprettet bogen som fik id: {toCreate.BookId}");
+                MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
                 this.Close();
             }
         }
