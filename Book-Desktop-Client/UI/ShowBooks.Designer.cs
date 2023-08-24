@@ -58,7 +58,7 @@
             buttonGetAllBooks = new Button();
             buttonUpdateBook = new Button();
             buttonDeleteBook = new Button();
-            buttonPicture = new Button();
+            chooseFiles = new Button();
             flowLayoutPanel1 = new FlowLayoutPanel();
             labelProcessText = new Label();
             SuspendLayout();
@@ -349,14 +349,15 @@
             buttonDeleteBook.Text = "Slet bog";
             buttonDeleteBook.UseVisualStyleBackColor = true;
             // 
-            // buttonPicture
+            // chooseFiles
             // 
-            buttonPicture.Location = new Point(1443, 367);
-            buttonPicture.Name = "buttonPicture";
-            buttonPicture.Size = new Size(121, 34);
-            buttonPicture.TabIndex = 48;
-            buttonPicture.Text = "Vælg billedfil";
-            buttonPicture.UseVisualStyleBackColor = true;
+            chooseFiles.Location = new Point(1443, 367);
+            chooseFiles.Name = "chooseFiles";
+            chooseFiles.Size = new Size(121, 34);
+            chooseFiles.TabIndex = 48;
+            chooseFiles.Text = "Vælg billedfil";
+            chooseFiles.UseVisualStyleBackColor = true;
+            chooseFiles.Click += chooseFiles_Click;
             // 
             // flowLayoutPanel1
             // 
@@ -382,7 +383,7 @@
             ClientSize = new Size(1747, 787);
             Controls.Add(labelProcessText);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(buttonPicture);
+            Controls.Add(chooseFiles);
             Controls.Add(buttonDeleteBook);
             Controls.Add(buttonUpdateBook);
             Controls.Add(buttonGetAllBooks);
@@ -454,7 +455,7 @@
         private Button buttonGetAllBooks;
         private Button buttonUpdateBook;
         private Button buttonDeleteBook;
-        private Button buttonPicture;
+        private Button chooseFiles;
         private FlowLayoutPanel flowLayoutPanel1;
         private Label labelProcessText;
     }

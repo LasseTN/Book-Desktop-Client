@@ -26,7 +26,7 @@ namespace Model {
             BookImagesPath = new List<string>();
         }
 
-        public Book(int bookId, string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status) {
+        public Book(int bookId, string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status, List<string> bookImagesPath) {
             BookId = bookId;
             Title = title;
             Author = author;

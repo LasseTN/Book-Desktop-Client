@@ -1,11 +1,15 @@
 ﻿using Book_Desktop_Client.ControlLayer;
 using Book_Desktop_Client.ControlLayer.Interfaces;
 using Book_Desktop_Client.Util;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Model;
-using System.Reflection.Metadata.Ecma335;
+using System.Windows.Forms;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
+
+        private List<IFormFile> _imageList;
 
         private List<Book> _booksToShowList;
         private List<Genre>? _genreList;
@@ -21,6 +25,7 @@ namespace Book_Desktop_Client.UI {
             _genreControl = new GenreControl();
             _locationControl = new LocationControl();
             _bookControl = new BookControl();
+            _imageList = new List<IFormFile>();
 
             LoadDataAsync();
             InitializeComponent();
@@ -69,7 +74,7 @@ namespace Book_Desktop_Client.UI {
             await GetAllBooks();
             ShowBooks showBookModels = new ShowBooks();
 
-            
+
         }
 
         private async Task GetAllBooks() {
@@ -144,7 +149,7 @@ namespace Book_Desktop_Client.UI {
             string processText = labelProcessText.Text;
             await CreateNewBookModel();
             ShowGenre showBookModels = new ShowGenre();
-            
+
 
 
         }
@@ -173,8 +178,26 @@ namespace Book_Desktop_Client.UI {
             toCreate.Location = selectedLocation;
 
             toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
+            toCreate.BookImagesPath = new List<string>();
 
-            createdBook = new Book(-1, toCreate.Title, toCreate.Author, toCreate.Genre, toCreate.NoOfPages, toCreate.BookType, toCreate.IsbnNo, toCreate.Location, toCreate.Status);
+            labelProcessText.Text = "Stadigvæk igang";
+
+            if (_imageList.Count() > 0) {
+
+                foreach (var file in _imageList) {
+                    if (file.Length > 0) {
+                        using (var ms = new MemoryStream()) {
+                            file.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            string s = Convert.ToBase64String(fileBytes);
+                            toCreate.BookImagesPath.Add(s);
+                            labelProcessText.Text = "Billeder tilføjet";
+                        }
+                    }
+                }
+            }
+
+            createdBook = new Book(-1, toCreate.Title, toCreate.Author, toCreate.Genre, toCreate.NoOfPages, toCreate.BookType, toCreate.IsbnNo, toCreate.Location, toCreate.Status, toCreate.BookImagesPath);
             createdBook = await _bookControl.CreateNewBook(toCreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
@@ -251,9 +274,93 @@ namespace Book_Desktop_Client.UI {
             comboBoxLocation.DataSource = _locationList;
         }
 
+        //private void chooseFiles_Click_1(object sender, EventArgs e) {
+        //    OpenFileDialog openFileDialog = new OpenFileDialog();
+        //    openFileDialog.Multiselect = true;
+        //    if (openFileDialog.ShowDialog() == DialogResult.OK) {
+        //        foreach (string fileName in openFileDialog.FileNames) {
+        //            byte[] fileData = File.ReadAllBytes(fileName);
+        //            MemoryStream stream = new MemoryStream(fileData);
+        //            FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
+        //            _imageList.Add(file);
+        //        }
+        //        ShowImages();
+        //    }
+        //}
 
+        private void ShowImages() {
+            flowLayoutPanel1.Controls.Clear();
+            foreach (FormFile file in _imageList) {
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = Image.FromStream(file.OpenReadStream());
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.Click += new EventHandler(PictureBox_Click!);
+
+                Button btnDelete = new Button();
+                btnDelete.Text = "Slet";
+                btnDelete.Height = 30;
+                btnDelete.Tag = file;
+                btnDelete.Click += new EventHandler(BtnDelete_Click!);
+
+                FlowLayoutPanel panel = new FlowLayoutPanel();
+                panel.Controls.Add(pictureBox);
+                panel.Controls.Add(btnDelete);
+
+                flowLayoutPanel1.Controls.Add(panel);
+            }
+        }
+
+        private void PictureBox_Click(object sender, EventArgs e) {
+            PictureBox pictureBox = (PictureBox)sender;
+            Image image = pictureBox.Image;
+
+            Form popUpForm = new Form();
+            popUpForm.StartPosition = FormStartPosition.CenterParent;
+            popUpForm.Size = new Size(800, 600);
+            popUpForm.MaximizeBox = false;
+            popUpForm.MinimizeBox = false;
+            popUpForm.Text = "Billede visning";
+
+            PictureBox popupPictureBox = new PictureBox();
+            popupPictureBox.Dock = DockStyle.Fill;
+            popupPictureBox.Image = image;
+            popupPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+            popUpForm.Controls.Add(popupPictureBox);
+            popUpForm.ShowDialog();
+        }
+
+        private void BtnDelete_Click(object sender, EventArgs e) {
+            Button btnDelete = (Button)sender;
+            FormFile file = (FormFile)btnDelete.Tag;
+            _imageList.Remove(file);
+            FlowLayoutPanel panel = (FlowLayoutPanel)btnDelete.Parent;
+            PictureBox pictureBox = (PictureBox)panel.Controls[0];
+            pictureBox.Dispose();
+            file.OpenReadStream().Dispose();
+            panel.Dispose();
+        }
+
+        private void chooseFiles_Click(object sender, EventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                foreach (string fileName in openFileDialog.FileNames) {
+                    byte[] fileData = File.ReadAllBytes(fileName);
+                    MemoryStream stream = new MemoryStream(fileData);
+                    FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
+                    _imageList.Add(file);
+                }
+                ShowImages();
+            }
+        }
     }
-}
+
+        //    private void PictureBox_Click(object sender, EventArgs e) {
+
+        //}
+    }
+
 
 
 
