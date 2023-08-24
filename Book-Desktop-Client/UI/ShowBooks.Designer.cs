@@ -413,7 +413,6 @@
             ForeColor = SystemColors.ControlText;
             Name = "ShowBooks";
             Text = "ShowBooks";
-            Load += ShowBooks_Load;
             ResumeLayout(false);
             PerformLayout();
         }

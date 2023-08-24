@@ -63,18 +63,11 @@ namespace Book_Desktop_Client.UI {
         }
 
 
-        private void ShowBooks_Load(object sender, EventArgs e) {
-
-        }
-
-
         private async void buttonGetAllBooks_Click(object sender, EventArgs e) {
 
             string processText = labelProcessText.Text;
             await GetAllBooks();
             ShowBooks showBookModels = new ShowBooks();
-
-
         }
 
         private async Task GetAllBooks() {
@@ -165,18 +158,13 @@ namespace Book_Desktop_Client.UI {
 
             toCreate.Title = textBoxTitle.Text;
             toCreate.Author = textBoxAuthor.Text;
-
             Genre selectedGenre = (Genre)comboBoxGenre.SelectedItem;
             toCreate.Genre = selectedGenre;
-
             toCreate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
-
             toCreate.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
             toCreate.IsbnNo = textBoxIsbnNo.Text;
-
             Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
             toCreate.Location = selectedLocation;
-
             toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
             toCreate.BookImagesPath = new List<string>();
 
