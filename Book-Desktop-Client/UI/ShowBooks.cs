@@ -274,6 +274,21 @@ namespace Book_Desktop_Client.UI {
             comboBoxLocation.DataSource = _locationList;
         }
 
+        //Button for choosing images
+        private void chooseFiles_Click(object sender, EventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = true;
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                foreach (string fileName in openFileDialog.FileNames) {
+                    byte[] fileData = File.ReadAllBytes(fileName);
+                    MemoryStream stream = new MemoryStream(fileData);
+                    FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
+                    _imageList.Add(file);
+                }
+                ShowImages();
+            }
+        }
+
         private void ShowImages() {
             flowLayoutPanel1.Controls.Clear();
             foreach (FormFile file in _imageList) {
@@ -296,6 +311,7 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
+        // Click the uploaded photo to maximize it
         private void PictureBox_Click(object sender, EventArgs e) {
             PictureBox pictureBox = (PictureBox)sender;
             Image image = pictureBox.Image;
@@ -316,6 +332,7 @@ namespace Book_Desktop_Client.UI {
             popUpForm.ShowDialog();
         }
 
+        // Delete the uploaded photo
         private void BtnDelete_Click(object sender, EventArgs e) {
             Button btnDelete = (Button)sender;
             FormFile file = (FormFile)btnDelete.Tag;
@@ -327,19 +344,7 @@ namespace Book_Desktop_Client.UI {
             panel.Dispose();
         }
 
-        private void chooseFiles_Click(object sender, EventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                foreach (string fileName in openFileDialog.FileNames) {
-                    byte[] fileData = File.ReadAllBytes(fileName);
-                    MemoryStream stream = new MemoryStream(fileData);
-                    FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
-                    _imageList.Add(file);
-                }
-                ShowImages();
-            }
-        }
+
     }
 
 }
