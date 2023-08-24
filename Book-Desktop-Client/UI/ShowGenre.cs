@@ -7,7 +7,6 @@ namespace Book_Desktop_Client.UI {
     public partial class ShowGenre : Form {
         private readonly IGenreControl _genreControl;
         private List<Genre> _genreList;
-        private int? genreId;
 
         public ShowGenre() {
             InitializeComponent();

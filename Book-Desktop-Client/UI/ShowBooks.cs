@@ -64,6 +64,15 @@ namespace Book_Desktop_Client.UI {
 
 
         private async void buttonGetAllBooks_Click(object sender, EventArgs e) {
+
+            string processText = labelProcessText.Text;
+            await GetAllBooks();
+            ShowBooks showBookModels = new ShowBooks();
+
+            
+        }
+
+        private async Task GetAllBooks() {
             buttonGetAllBooks.Enabled = false;
             labelProcessText.Text = "Arbejder...";
             listViewShowBooks.Items.Clear();
@@ -135,7 +144,7 @@ namespace Book_Desktop_Client.UI {
             string processText = labelProcessText.Text;
             await CreateNewBookModel();
             ShowGenre showBookModels = new ShowGenre();
-            showBookModels.UpdateList();
+            
 
 
         }
@@ -170,7 +179,7 @@ namespace Book_Desktop_Client.UI {
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
                 MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
-                this.Close();
+                GetAllBooks();
             }
         }
 

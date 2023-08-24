@@ -9,6 +9,7 @@ namespace Book_Desktop_Client.Util {
         Læst,
         Ulæst,
         Uafsluttet,
-        Igangværende
+        Igangværende,
+        Opslagsværk
     }
 }
