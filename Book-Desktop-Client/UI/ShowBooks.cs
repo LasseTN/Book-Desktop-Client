@@ -274,20 +274,6 @@ namespace Book_Desktop_Client.UI {
             comboBoxLocation.DataSource = _locationList;
         }
 
-        //private void chooseFiles_Click_1(object sender, EventArgs e) {
-        //    OpenFileDialog openFileDialog = new OpenFileDialog();
-        //    openFileDialog.Multiselect = true;
-        //    if (openFileDialog.ShowDialog() == DialogResult.OK) {
-        //        foreach (string fileName in openFileDialog.FileNames) {
-        //            byte[] fileData = File.ReadAllBytes(fileName);
-        //            MemoryStream stream = new MemoryStream(fileData);
-        //            FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
-        //            _imageList.Add(file);
-        //        }
-        //        ShowImages();
-        //    }
-        //}
-
         private void ShowImages() {
             flowLayoutPanel1.Controls.Clear();
             foreach (FormFile file in _imageList) {
