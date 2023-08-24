@@ -342,10 +342,7 @@ namespace Book_Desktop_Client.UI {
         }
     }
 
-        //    private void PictureBox_Click(object sender, EventArgs e) {
-
-        //}
-    }
+}
 
 
 
