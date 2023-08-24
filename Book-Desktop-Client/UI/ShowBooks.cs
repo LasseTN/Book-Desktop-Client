@@ -10,8 +10,7 @@ namespace Book_Desktop_Client.UI {
         private List<Book> _booksToShowList;
         private List<Genre>? _genreList;
         private List<Location> _locationList;
-        private List<Type> _typeList;
-        
+
 
         private readonly IBookControl _bookControl;
         private readonly IGenreControl _genreControl;
@@ -124,7 +123,6 @@ namespace Book_Desktop_Client.UI {
                 textBoxId.Text = item.SubItems[8].Text;
                 labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[8].Text;
 
-
             }
         }
 
@@ -150,12 +148,11 @@ namespace Book_Desktop_Client.UI {
             labelProcessText.Text = "Arbejder på sagen...";
 
             Book? book = comboBoxGenre.SelectedItem as Book;
-            
+
             toCreate.Title = textBoxTitle.Text;
             toCreate.Author = textBoxAuthor.Text;
 
             Genre selectedGenre = (Genre)comboBoxGenre.SelectedItem;
-            //Genre selectedGenre = new Genre { GenreName = selectedGenre.ToString() };
             toCreate.Genre = selectedGenre;
 
             toCreate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
@@ -164,7 +161,6 @@ namespace Book_Desktop_Client.UI {
             toCreate.IsbnNo = textBoxIsbnNo.Text;
 
             Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
-            //Location selectedLocation = new Location { LocationName = selectedLocation.ToString() };
             toCreate.Location = selectedLocation;
 
             toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();

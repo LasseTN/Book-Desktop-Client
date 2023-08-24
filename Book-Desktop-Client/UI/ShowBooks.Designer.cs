@@ -81,7 +81,7 @@
             listViewShowBooks.Cursor = Cursors.Hand;
             listViewShowBooks.Location = new Point(60, 93);
             listViewShowBooks.Name = "listViewShowBooks";
-            listViewShowBooks.Size = new Size(984, 487);
+            listViewShowBooks.Size = new Size(994, 487);
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
