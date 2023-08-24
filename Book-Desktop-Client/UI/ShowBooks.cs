@@ -113,7 +113,7 @@ namespace Book_Desktop_Client.UI {
             if (listViewShowBooks.SelectedItems.Count > 0) {
                 ListViewItem item = listViewShowBooks.SelectedItems[0];
 
-                textBoxTitle.Text = item.SubItems[0].Text;
+                textBoxTitle.Text = item.SubItems[0].Text ?? string.Empty;
                 textBoxAuthor.Text = item.SubItems[1].Text;
                 comboBoxGenre.Text = item.SubItems[2].Text ?? string.Empty;
                 textBoxNoOfPages.Text = item.SubItems[3].Text;
@@ -144,35 +144,36 @@ namespace Book_Desktop_Client.UI {
 
         private async Task CreateNewBookModel() {
 
+            Book toCreate = new Book();
             Book? createdBook = null;
 
             labelProcessText.Text = "Arbejder på sagen...";
 
             Book? book = comboBoxGenre.SelectedItem as Book;
-
-            createdBook.Title = textBoxTitle.Text;
-            createdBook.Author = textBoxAuthor.Text;
+            
+            toCreate.Title = textBoxTitle.Text;
+            toCreate.Author = textBoxAuthor.Text;
 
             Genre selectedGenre = (Genre)comboBoxGenre.SelectedItem;
             //Genre selectedGenre = new Genre { GenreName = selectedGenre.ToString() };
-            createdBook.Genre = selectedGenre;
+            toCreate.Genre = selectedGenre;
 
-            createdBook.NoOfPages = int.Parse(textBoxNoOfPages.Text);
+            toCreate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
 
-            createdBook.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
-            createdBook.IsbnNo = textBoxIsbnNo.Text;
+            toCreate.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
+            toCreate.IsbnNo = textBoxIsbnNo.Text;
 
-            Location selectedLoactionEnum = (Location)comboBoxLocation.SelectedItem;
-            Location selectedLocation = new Location { LocationName = selectedLoactionEnum.ToString() };
-            createdBook.Location = selectedLocation;
+            Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
+            //Location selectedLocation = new Location { LocationName = selectedLocation.ToString() };
+            toCreate.Location = selectedLocation;
 
-            createdBook.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
+            toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
 
-            Book createBook = new Book(-1, createdBook.Title, createdBook.Author, createdBook.Genre, createdBook.NoOfPages, createdBook.BookType, createdBook.IsbnNo, createdBook.Location, createdBook.Status);
+            Book createBook = new Book(-1, toCreate.Title, toCreate.Author, toCreate.Genre, toCreate.NoOfPages, toCreate.BookType, toCreate.IsbnNo, toCreate.Location, toCreate.Status);
             createdBook = await _bookControl.CreateNewBook(createBook);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
-                MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
+                MessageBox.Show($"Du har nu oprettet bogen som fik id: {toCreate.BookId}");
                 this.Close();
             }
         }
