@@ -12,6 +12,6 @@ namespace Book_Desktop_Client.ControlLayer.Interfaces {
         public HttpStatusCode CurrentStatusCode { get; set; }
         Task<Book>? CreateNewBook(Book bookToCreate);
         Task<List<Book>?> GetAllBooks();
-        Task<Book> UpdateBook(Book bookToUpdate);
+        Task<bool> UpdateBook(Book bookToUpdate);
     }
 }

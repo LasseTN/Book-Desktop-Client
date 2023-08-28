@@ -33,8 +33,15 @@ namespace Book_Desktop_Client.ControlLayer {
 
         }
 
-        public Task<Book> UpdateBook(Book bookToUpdate) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdateBook(Book bookToUpdate) {
+            bool isUpdated = false;
+
+            try {
+                isUpdated = await _bookAccess.UpdatedBook(bookToUpdate);
+            } catch (Exception) {
+                isUpdated = false;
+            }
+            return isUpdated;
         }
     }
 }

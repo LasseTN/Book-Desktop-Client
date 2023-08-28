@@ -38,5 +38,9 @@ namespace Model {
             Status = status;
             BookImagesPath = new List<string>();
         }
+
+        public static implicit operator bool(Book? v) {
+            throw new NotImplementedException();
+        }
     }
 }

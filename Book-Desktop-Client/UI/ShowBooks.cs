@@ -194,9 +194,7 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
-        private void buttonUpdateBook_Click(object sender, EventArgs e) {
 
-        }
 
         private void buttonDeleteBook_Click(object sender, EventArgs e) {
 
@@ -332,7 +330,13 @@ namespace Book_Desktop_Client.UI {
             panel.Dispose();
         }
 
+        private async void buttonUpdateBook_Click(object sender, EventArgs e) {
+            bool isUpdated = false;
 
+            if (validateInputs()) {
+                _
+            }
+        }
     }
 
 }

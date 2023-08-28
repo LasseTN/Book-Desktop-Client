@@ -73,8 +73,25 @@ namespace Book_Desktop_Client.ServiceLayer {
             return temp1;
         }
 
-        public Task<Book?> UpdatedBook(Book bookToUpdate) {
-            throw new NotImplementedException();
+        public async Task<bool> UpdatedBook(Book bookToUpdate) {
+            bool isUpdated = false;
+
+            _Connection.UseUrl = _Connection.BaseUrl + $"/{bookToUpdate.BookId}";
+
+            if (_Connection != null) {
+                try {
+                    var json = JsonConvert.SerializeObject(bookToUpdate);
+                    var postData = new StringContent(json, Encoding.UTF8, "application/json");
+                    HttpResponseMessage? response = await _Connection.CallServicePut(postData);
+                    if (response != null && response.IsSuccessStatusCode) {
+                        var content = await response.Content.ReadAsStringAsync();
+                        isUpdated = true;
+                    }
+                } catch (Exception) {
+                    isUpdated = false;
+                }
+            }
+            return isUpdated;
         }
     }
 }

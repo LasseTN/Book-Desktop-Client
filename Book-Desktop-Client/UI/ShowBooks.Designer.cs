@@ -339,6 +339,7 @@
             buttonUpdateBook.TabIndex = 46;
             buttonUpdateBook.Text = "Opdater bog";
             buttonUpdateBook.UseVisualStyleBackColor = true;
+            buttonUpdateBook.Click += buttonUpdateBook_Click;
             // 
             // buttonDeleteBook
             // 
