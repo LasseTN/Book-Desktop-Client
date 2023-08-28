@@ -10,7 +10,6 @@ namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
         private Book _bookToUpdate;
-        private Book _bookWithUpdatedInfo;
         private List<IFormFile> _imageList;
 
         private List<Book> _booksToShowList;
@@ -24,7 +23,6 @@ namespace Book_Desktop_Client.UI {
 
         public ShowBooks() {
             _bookToUpdate = new Book();
-            _bookWithUpdatedInfo = new Book(_bookToUpdate.BookId, _bookToUpdate.Title, _bookToUpdate.Author, _bookToUpdate.Genre, _bookToUpdate.NoOfPages, _bookToUpdate.BookType, _bookToUpdate.IsbnNo, _bookToUpdate.Location, _bookToUpdate.Status, _bookToUpdate.BookImagesPath = null);  
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
             _locationControl = new LocationControl();
@@ -149,18 +147,11 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
-        private void buttonPicture_Click(object sender, EventArgs e) {
-
-        }
-
         private async void buttonCreateBook_Click(object sender, EventArgs e) {
 
             string processText = labelProcessText.Text;
             await CreateNewBookModel();
             ShowGenre showBookModels = new ShowGenre();
-
-
-
         }
 
         private async Task CreateNewBookModel() {
@@ -210,12 +201,6 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
-
-
-        private void buttonDeleteBook_Click(object sender, EventArgs e) {
-
-        }
-
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
             DialogResult dialogResult = MessageBox.Show("Er du sikker på at du vil lukke vinduet?", "Bekræft", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.Yes) {
@@ -240,9 +225,7 @@ namespace Book_Desktop_Client.UI {
                     comboBoxGenre.Enabled = true;
                     comboBoxGenre.Show();
                 }
-
             }
-
         }
 
         private async void comboBoxLocation_SelectedIndexChanged(object sender, EventArgs e) {
@@ -261,6 +244,7 @@ namespace Book_Desktop_Client.UI {
                 }
             }
         }
+
         private async void LoadDataAsync() {
             _genreList = await _genreControl.GetAllGenres();
             _locationList = await _locationControl.GetAllLocations();
@@ -291,6 +275,7 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
+        // Displays the image in the app and adds a delete button, so you can delete the picture
         private void ShowImages() {
             flowLayoutPanel1.Controls.Clear();
             foreach (FormFile file in _imageList) {
