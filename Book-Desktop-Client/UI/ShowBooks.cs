@@ -352,10 +352,10 @@ namespace Book_Desktop_Client.UI {
             // Checks if an item is selected in the listview
             if (listViewShowBooks.SelectedItems.Count > 0) {
 
-                // Gets the selected item (which represents a Book object)
+                // Gets the selected item (represents a Book object)
                 ListViewItem selectedItem = listViewShowBooks.SelectedItems[0];
 
-                // Gets the bookId from the ListViewItem's subitems (assuming it's the last subitem)
+                // Gets the bookId from the ListViewItems subitems (assuming its the last subitem)
                 int idRaw = GetAsInt(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
 
                 if (validateInputs()) {
