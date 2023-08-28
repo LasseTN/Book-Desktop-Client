@@ -83,6 +83,7 @@
             listViewShowBooks.Location = new Point(60, 125);
             listViewShowBooks.Name = "listViewShowBooks";
             listViewShowBooks.Size = new Size(994, 487);
+            listViewShowBooks.Sorting = SortOrder.Ascending;
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
@@ -376,6 +377,7 @@
             SortBy.TabIndex = 51;
             SortBy.Text = "Sorter efter";
             SortBy.UseVisualStyleBackColor = true;
+
             // 
             // comboBoxSortBy
             // 
@@ -384,6 +386,7 @@
             comboBoxSortBy.Name = "comboBoxSortBy";
             comboBoxSortBy.Size = new Size(179, 23);
             comboBoxSortBy.TabIndex = 52;
+
             // 
             // ShowBooks
             // 

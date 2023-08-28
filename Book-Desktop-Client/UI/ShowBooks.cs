@@ -4,10 +4,12 @@ using Book_Desktop_Client.Util;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Model;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
+
 
         private Book _bookToUpdate;
         private List<IFormFile> _imageList;
@@ -22,6 +24,7 @@ namespace Book_Desktop_Client.UI {
         private readonly ILocationControl _locationControl;
 
         public ShowBooks() {
+
             _bookToUpdate = new Book();
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
