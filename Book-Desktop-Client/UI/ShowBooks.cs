@@ -349,12 +349,13 @@ namespace Book_Desktop_Client.UI {
         private async void buttonUpdateBook_Click(object sender, EventArgs e) {
             bool isUpdated = false;
 
-            // Check if an item is selected in the list view
+            // Checks if an item is selected in the listview
             if (listViewShowBooks.SelectedItems.Count > 0) {
-                // Get the selected item (which represents a Book object)
+
+                // Gets the selected item (which represents a Book object)
                 ListViewItem selectedItem = listViewShowBooks.SelectedItems[0];
 
-                // Get the bookId from the ListViewItem's subitems (assuming it's the last subitem)
+                // Gets the bookId from the ListViewItem's subitems (assuming it's the last subitem)
                 int idRaw = GetAsInt(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
 
                 if (validateInputs()) {
@@ -371,7 +372,7 @@ namespace Book_Desktop_Client.UI {
                     _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
                     _bookToUpdate.BookImagesPath = new List<string>();
 
-                    // Pass the obtained bookId to the update method
+                    // Passes the found bookId to the update method
                     isUpdated = await _bookControl.UpdateBook(_bookToUpdate);
 
                     if (isUpdated) {
