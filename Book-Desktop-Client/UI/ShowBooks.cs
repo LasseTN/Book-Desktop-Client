@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
+        private Book _selectedSortBy;
         private Book _bookToUpdate;
         private List<IFormFile> _imageList;
 
@@ -22,6 +23,7 @@ namespace Book_Desktop_Client.UI {
         private readonly ILocationControl _locationControl;
 
         public ShowBooks() {
+            _selectedSortBy = new Book();
             _bookToUpdate = new Book();
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
@@ -246,16 +248,23 @@ namespace Book_Desktop_Client.UI {
             _genreList = await _genreControl.GetAllGenres();
             _locationList = await _locationControl.GetAllLocations();
 
-            //Genre
+            // Genre
             comboBoxGenre.DisplayMember = "GenreName";
             comboBoxGenre.ValueMember = "GenreId";
             comboBoxGenre.DataSource = _genreList;
 
-            //Location
+            // Location
             comboBoxLocation.DisplayMember = "locationName";
             comboBoxLocation.ValueMember = "locationId";
             comboBoxLocation.DataSource = _locationList;
+
+            // Sort By
+            comboBoxSortBy.Items.Add("Genre");
+            comboBoxSortBy.Items.Add("Author");
+            comboBoxSortBy.Items.AddRange(Enum.GetValues(typeof(StatusEnum)).Cast<object>().ToArray());
+
         }
+
 
         //Button for choosing images
         private void chooseFiles_Click(object sender, EventArgs e) {
@@ -364,8 +373,74 @@ namespace Book_Desktop_Client.UI {
                 }
             }
         }
+
+        private async void ComboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e) {
+
+            int selectedIndex = comboBoxSortBy.SelectedIndex;
+
+            if (selectedIndex >= 0) {
+                string selectedSortBy = comboBoxSortBy.SelectedItem.ToString();
+
+                if (selectedSortBy == "Genre") {
+                    _selectedSortBy.Genre = (Genre)comboBoxSortBy.SelectedItem;
+                    _selectedSortBy.Author = null;
+                    _selectedSortBy.Status = null;
+                } else if (selectedSortBy == "Author") {
+                    _selectedSortBy.Genre = null;
+                    _selectedSortBy.Status = null;
+                    _selectedSortBy.Author = comboBoxSortBy.SelectedItem.ToString();
+                } else if (selectedSortBy == "Status") {
+                    _selectedSortBy.Genre = null;
+                    _selectedSortBy.Author = null;
+                    _selectedSortBy.Status = ((StatusEnum)comboBoxSortBy.SelectedItem).ToString();
+                }
+
+                if (_booksToShowList!.Count <= 0) {
+                    comboBoxLocation.Enabled = false;
+                    comboBoxLocation.Hide();
+
+                } else {
+                    comboBoxLocation.Enabled = true;
+                    comboBoxLocation.Show();
+                }
+            }
+        }
+    
+        private void SortBy_Click(object sender, EventArgs e) {
+
+
+            if (_selectedSortBy.Genre != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Genre.GenreName).ToList();
+            } else if (_selectedSortBy.Author != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Author).ToList();
+            } else if (_selectedSortBy.Status != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Status).ToList();
+            }
+
+            listViewShowBooks.Items.Clear();
+            foreach (Book book in _booksToShowList) {
+                ListViewItem item = CreateListViewItem(book);
+                listViewShowBooks.Items.Add(item);
+            }
+            
+        }
+
+        private ListViewItem CreateListViewItem(Book book) {
+            string[] details = {
+                book.Title,
+                book.Author,
+                book.Genre.GenreName,
+                book.NoOfPages.ToString(),
+                book.IsbnNo,
+                book.Location.LocationName,
+                book.Status,
+                book.BookId.ToString() ?? "Fejl",
+            };
+            return new ListViewItem(details);
+        }
     }
 }
+
 
 
 

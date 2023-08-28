@@ -376,6 +376,7 @@
             SortBy.TabIndex = 51;
             SortBy.Text = "Sorter efter";
             SortBy.UseVisualStyleBackColor = true;
+            SortBy.Click += SortBy_Click;
             // 
             // comboBoxSortBy
             // 
@@ -384,6 +385,7 @@
             comboBoxSortBy.Name = "comboBoxSortBy";
             comboBoxSortBy.Size = new Size(179, 23);
             comboBoxSortBy.TabIndex = 52;
+            comboBoxSortBy.SelectedIndexChanged += ComboBoxSortBy_SelectedIndexChanged;
             // 
             // ShowBooks
             // 
