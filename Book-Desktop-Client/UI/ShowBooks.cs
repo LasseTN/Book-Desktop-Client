@@ -130,15 +130,15 @@ namespace Book_Desktop_Client.UI {
             if (listViewShowBooks.SelectedItems.Count > 0) {
                 ListViewItem item = listViewShowBooks.SelectedItems[0];
 
-                textBoxTitle.Text = item.SubItems[0].Text ?? string.Empty;
-                textBoxAuthor.Text = item.SubItems[1].Text;
-                comboBoxGenre.Text = item.SubItems[2].Text ?? string.Empty;
-                textBoxNoOfPages.Text = item.SubItems[3].Text;
-                comboBoxType.Text = item.SubItems[4].Text;
-                textBoxIsbnNo.Text = item.SubItems[5].Text;
-                comboBoxLocation.Text = item.SubItems[6].Text;
-                comboBoxStatus.Text = item.SubItems[7].Text;
-                textBoxId.Text = item.SubItems[8].Text;
+                textBoxTitle.Text = item.SubItems[0].Text.Trim() ?? string.Empty;
+                textBoxAuthor.Text = item.SubItems[1].Text.Trim();
+                comboBoxGenre.Text = item.SubItems[2].Text.Trim() ?? string.Empty;
+                textBoxNoOfPages.Text = item.SubItems[3].Text.Trim();
+                comboBoxType.Text = item.SubItems[4].Text.Trim();
+                textBoxIsbnNo.Text = item.SubItems[5].Text.Trim();
+                comboBoxLocation.Text = item.SubItems[6].Text.Trim();
+                comboBoxStatus.Text = item.SubItems[7].Text.Trim();
+                textBoxId.Text = item.SubItems[8].Text.Trim();
                 labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[8].Text;
 
             }
