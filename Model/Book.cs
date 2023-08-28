@@ -12,7 +12,6 @@ namespace Model {
         public string Status { get; set; }
         public List<string>? BookImagesPath { get; set; }
 
-        public Book() { }
 
         public Book(string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status ) {
             Title = title;
@@ -39,8 +38,9 @@ namespace Model {
             BookImagesPath = new List<string>();
         }
 
-        public static implicit operator bool(Book? v) {
-            throw new NotImplementedException();
+        public Book() {
         }
+
+
     }
 }

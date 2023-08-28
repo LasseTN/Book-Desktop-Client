@@ -9,6 +9,8 @@ using System.Windows.Forms;
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
+        private Book _bookToUpdate;
+        private Book _bookWithUpdatedInfo;
         private List<IFormFile> _imageList;
 
         private List<Book> _booksToShowList;
@@ -21,6 +23,8 @@ namespace Book_Desktop_Client.UI {
         private readonly ILocationControl _locationControl;
 
         public ShowBooks() {
+            _bookToUpdate = new Book();
+            _bookWithUpdatedInfo = new Book(_bookToUpdate.BookId, _bookToUpdate.Title, _bookToUpdate.Author, _bookToUpdate.Genre, _bookToUpdate.NoOfPages, _bookToUpdate.BookType, _bookToUpdate.IsbnNo, _bookToUpdate.Location, _bookToUpdate.Status, _bookToUpdate.BookImagesPath = null);  
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
             _locationControl = new LocationControl();
@@ -40,6 +44,18 @@ namespace Book_Desktop_Client.UI {
             comboBoxStatus.DataSource = Enum.GetValues(typeof(StatusEnum));
             StatusEnum bookStatus = (StatusEnum)comboBoxStatus.SelectedItem;
 
+        }
+
+        private int GetAsInt(string rawString) {
+            int foundId = -1;
+
+            if (!string.IsNullOrEmpty(rawString)) {
+                bool wasParseOk = int.TryParse(rawString.Trim(), out foundId);
+                if (!wasParseOk) {
+                    foundId = -1;
+                }
+            }
+            return foundId;
         }
 
         private bool validateInputs() {
@@ -333,13 +349,44 @@ namespace Book_Desktop_Client.UI {
         private async void buttonUpdateBook_Click(object sender, EventArgs e) {
             bool isUpdated = false;
 
-            if (validateInputs()) {
-                _
+            // Check if an item is selected in the list view
+            if (listViewShowBooks.SelectedItems.Count > 0) {
+                // Get the selected item (which represents a Book object)
+                ListViewItem selectedItem = listViewShowBooks.SelectedItems[0];
+
+                // Get the bookId from the ListViewItem's subitems (assuming it's the last subitem)
+                int idRaw = GetAsInt(selectedItem.SubItems[selectedItem.SubItems.Count - 1].Text);
+
+                if (validateInputs()) {
+                    _bookToUpdate.BookId = idRaw;
+                    _bookToUpdate.Title = textBoxTitle.Text;
+                    _bookToUpdate.Author = textBoxAuthor.Text;
+                    Genre selectedGenre = (Genre)comboBoxGenre.SelectedItem;
+                    _bookToUpdate.Genre = selectedGenre;
+                    _bookToUpdate.NoOfPages = int.Parse(textBoxNoOfPages.Text);
+                    _bookToUpdate.BookType = ((BookTypeEnum)comboBoxType.SelectedItem).ToString();
+                    _bookToUpdate.IsbnNo = textBoxIsbnNo.Text;
+                    Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
+                    _bookToUpdate.Location = selectedLocation;
+                    _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
+                    _bookToUpdate.BookImagesPath = new List<string>();
+
+                    // Pass the obtained bookId to the update method
+                    isUpdated = await _bookControl.UpdateBook(_bookToUpdate);
+
+                    if (isUpdated) {
+                        MessageBox.Show("Du har opdateret bogens oplysninger");
+                        GetAllBooks();
+                    }
+                }
             }
         }
     }
-
 }
+
+
+
+
 
 
 
