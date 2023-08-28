@@ -32,8 +32,6 @@ namespace Book_Desktop_Client.UI {
             LoadDataAsync();
             InitializeComponent();
 
-
-
             // Type
             comboBoxType.DataSource = Enum.GetValues(typeof(BookTypeEnum));
             BookTypeEnum bookType = (BookTypeEnum)comboBoxType.SelectedItem;
@@ -41,7 +39,6 @@ namespace Book_Desktop_Client.UI {
             // Status
             comboBoxStatus.DataSource = Enum.GetValues(typeof(StatusEnum));
             StatusEnum bookStatus = (StatusEnum)comboBoxStatus.SelectedItem;
-
         }
 
         private int GetAsInt(string rawString) {
