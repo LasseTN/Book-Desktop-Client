@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Book_Desktop_Client.Util {
     public enum BookTypeEnum {
         Paperback,
-        Hardback
+        Hardback,
+        Indbundet
     }
 }
