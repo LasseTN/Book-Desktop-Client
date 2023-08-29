@@ -198,7 +198,20 @@ namespace Book_Desktop_Client.UI {
                 labelProcessText.Text = "Bogen er oprettet";
                 MessageBox.Show($"Du har nu oprettet bogen som fik id: {createdBook.BookId}");
                 GetAllBooks();
+                ClearTextBoxes();
             }
+        }
+
+        private async Task ClearTextBoxes() {
+            textBoxTitle.Clear();
+            textBoxAuthor.Clear();
+            comboBoxGenre.Items.Clear();
+            textBoxNoOfPages.Clear();
+            comboBoxType.Items.Clear();
+            textBoxIsbnNo.Clear();
+            comboBoxLocation.Items.Clear();
+            comboBoxStatus.Items.Clear();
+            textBoxId.Text = string.Empty;
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
