@@ -204,14 +204,14 @@ namespace Book_Desktop_Client.UI {
 
         private async Task ClearTextBoxes() {
             textBoxTitle.Clear();
-            textBoxAuthor.Clear();
-            comboBoxGenre.Items.Clear();
+            textBoxAuthor.Clear();          
             textBoxNoOfPages.Clear();
-            comboBoxType.Items.Clear();
             textBoxIsbnNo.Clear();
+            textBoxId.Text = string.Empty;
+            comboBoxGenre.Items.Clear();
+            comboBoxType.Items.Clear();
             comboBoxLocation.Items.Clear();
             comboBoxStatus.Items.Clear();
-            textBoxId.Text = string.Empty;
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
