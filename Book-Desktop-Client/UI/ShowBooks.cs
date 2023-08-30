@@ -203,7 +203,7 @@ namespace Book_Desktop_Client.UI {
 
         private async Task ClearTextBoxes() {
             textBoxTitle.Clear();
-            textBoxAuthor.Clear();          
+            textBoxAuthor.Clear();
             textBoxNoOfPages.Clear();
             textBoxIsbnNo.Clear();
             textBoxId.Text = string.Empty;
@@ -211,6 +211,8 @@ namespace Book_Desktop_Client.UI {
             comboBoxType.Items.Clear();
             comboBoxLocation.Items.Clear();
             comboBoxStatus.Items.Clear();
+            comboBoxSortByGenre.Items.Clear();
+            comboBoxSortBy.Items.Clear();
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
@@ -273,6 +275,7 @@ namespace Book_Desktop_Client.UI {
 
             // Sort By
             comboBoxSortBy.Items.Add("Author");
+            comboBoxSortByGenre.Items.Add("Genre");
 
         }
 
@@ -398,24 +401,50 @@ namespace Book_Desktop_Client.UI {
             }
         }
 
-        private void SortBy_Click(object sender, EventArgs e) {
+        private void comboBoxSortByGenre_SelectedIndexChanged(object sender, EventArgs e) {
 
+            int selectedIndex = comboBoxSortByGenre.SelectedIndex;
 
-            if (_selectedSortBy.Author != null) {
+            if (selectedIndex >= 0) {
+                string selectedSortBy = comboBoxSortByGenre.SelectedItem.ToString();
 
-                _booksToShowList = _booksToShowList.OrderBy(book => book.Author).ToList();
-
-                if (_selectedSortBy.Author != null) {
+                if (selectedSortBy == "Genre") {
+                    _genreControl.GetAllGenres();
+                    _selectedSortBy.Genre = Model.Genre.Parse(comboBoxSortByGenre.SelectedItem.ToString());
+                    
 
                 }
-                listViewShowBooks.Items.Clear();
-                foreach (Book book in _booksToShowList) {
-                    ListViewItem item = CreateListViewItem(book);
-                    listViewShowBooks.Items.Add(item);
-                }
-
             }
         }
+
+        // Method for comparing genres in order to sort them
+        public class BookComparerByGenre : IComparer<Book> {
+            public int Compare(Book x, Book y) {
+                if (x == null || y == null)
+                    return 0; // Handle null cases if needed
+
+                // Compare based on Genre property
+                return string.Compare(x.Genre.GenreName, y.Genre.GenreName, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+
+        private void SortBy_Click(object sender, EventArgs e) {
+            if (_selectedSortBy.Author != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Author).ToList();
+            }
+
+            if (_selectedSortBy.Genre != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book, new BookComparerByGenre()).ToList();
+            }
+
+            listViewShowBooks.Items.Clear();
+            foreach (Book book in _booksToShowList) {
+                ListViewItem item = CreateListViewItem(book);
+                listViewShowBooks.Items.Add(item);
+            }
+        }
+
+
 
         private ListViewItem CreateListViewItem(Book book) {
             string[] details = {
@@ -431,6 +460,8 @@ namespace Book_Desktop_Client.UI {
             };
             return new ListViewItem(details);
         }
+
+
     }
 }
 
