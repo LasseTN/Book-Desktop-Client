@@ -431,6 +431,7 @@ namespace Book_Desktop_Client.UI {
                 book.Author,
                 book.Genre.GenreName,
                 book.NoOfPages.ToString(),
+                book.BookType.ToString(),
                 book.IsbnNo,
                 book.Location.LocationName,
                 book.Status,
