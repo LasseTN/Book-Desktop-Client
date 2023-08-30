@@ -62,7 +62,6 @@
             labelProcessText = new Label();
             SortBy = new Button();
             comboBoxSortBy = new ComboBox();
-            comboBoxSortByGenre = new ComboBox();
             SuspendLayout();
             // 
             // buttonCloseWindow
@@ -388,22 +387,12 @@
             comboBoxSortBy.TabIndex = 52;
             comboBoxSortBy.SelectedIndexChanged += ComboBoxSortBy_SelectedIndexChanged;
             // 
-            // comboBoxSortByGenre
-            // 
-            comboBoxSortByGenre.FormattingEnabled = true;
-            comboBoxSortByGenre.Location = new Point(559, 649);
-            comboBoxSortByGenre.Name = "comboBoxSortByGenre";
-            comboBoxSortByGenre.Size = new Size(179, 23);
-            comboBoxSortByGenre.TabIndex = 53;
-            comboBoxSortByGenre.SelectedIndexChanged += comboBoxSortByGenre_SelectedIndexChanged;
-            // 
             // ShowBooks
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(1747, 787);
-            Controls.Add(comboBoxSortByGenre);
             Controls.Add(comboBoxSortBy);
             Controls.Add(SortBy);
             Controls.Add(labelProcessText);
@@ -482,6 +471,5 @@
         private Label labelProcessText;
         private Button SortBy;
         private ComboBox comboBoxSortBy;
-        private ComboBox comboBoxSortByGenre;
     }
 }
