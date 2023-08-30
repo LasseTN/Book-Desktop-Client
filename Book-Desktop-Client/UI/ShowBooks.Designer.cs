@@ -83,7 +83,6 @@
             listViewShowBooks.Location = new Point(60, 125);
             listViewShowBooks.Name = "listViewShowBooks";
             listViewShowBooks.Size = new Size(994, 487);
-            listViewShowBooks.Sorting = SortOrder.Ascending;
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
