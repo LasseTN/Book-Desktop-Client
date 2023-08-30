@@ -412,9 +412,9 @@ namespace Book_Desktop_Client.UI {
         public class BookComparerByGenre : IComparer<Book> {
             public int Compare(Book x, Book y) {
                 if (x == null || y == null)
-                    return 0; // Handle null cases if needed
+                    return 0; 
 
-                // Compare based on Genre property
+                // Comparing genres
                 return string.Compare(x.Genre.GenreName, y.Genre.GenreName, StringComparison.OrdinalIgnoreCase);
             }
         }
@@ -435,7 +435,8 @@ namespace Book_Desktop_Client.UI {
                     listViewShowBooks.Items.Add(item);
                 }
             }
-
+            
+        // The sorted list displayed
             private ListViewItem CreateListViewItem(Book book) {
             string[] details = {
                 book.Title,
