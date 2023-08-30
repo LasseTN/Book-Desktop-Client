@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
-
+        private Book _selectedSortBy;
         private Book _bookToUpdate;
         private List<IFormFile> _imageList;
 
@@ -18,13 +18,12 @@ namespace Book_Desktop_Client.UI {
         private List<Genre>? _genreList;
         private List<Location> _locationList;
 
-
         private readonly IBookControl _bookControl;
         private readonly IGenreControl _genreControl;
         private readonly ILocationControl _locationControl;
 
         public ShowBooks() {
-
+            _selectedSortBy = new Book();
             _bookToUpdate = new Book();
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
@@ -262,16 +261,21 @@ namespace Book_Desktop_Client.UI {
             _genreList = await _genreControl.GetAllGenres();
             _locationList = await _locationControl.GetAllLocations();
 
-            //Genre
+            // Genre
             comboBoxGenre.DisplayMember = "GenreName";
             comboBoxGenre.ValueMember = "GenreId";
             comboBoxGenre.DataSource = _genreList;
 
-            //Location
+            // Location
             comboBoxLocation.DisplayMember = "locationName";
             comboBoxLocation.ValueMember = "locationId";
             comboBoxLocation.DataSource = _locationList;
+
+            // Sort By
+            comboBoxSortBy.Items.Add("Author");
+
         }
+
 
         //Button for choosing images
         private void chooseFiles_Click(object sender, EventArgs e) {
@@ -380,8 +384,56 @@ namespace Book_Desktop_Client.UI {
                 }
             }
         }
+
+        private async void ComboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e) {
+
+            int selectedIndex = comboBoxSortBy.SelectedIndex;
+
+            if (selectedIndex >= 0) {
+                string selectedSortBy = comboBoxSortBy.SelectedItem.ToString();
+
+                if (selectedSortBy == "Author") {
+                    _selectedSortBy.Author = comboBoxSortBy.SelectedItem.ToString();
+                }
+            }
+        }
+
+        private void SortBy_Click(object sender, EventArgs e) {
+
+
+            if (_selectedSortBy.Author != null) {
+
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Author).ToList();
+
+                if (_selectedSortBy.Author != null) {
+
+                }
+                listViewShowBooks.Items.Clear();
+                foreach (Book book in _booksToShowList) {
+                    ListViewItem item = CreateListViewItem(book);
+                    listViewShowBooks.Items.Add(item);
+                }
+
+            }
+        }
+
+        private ListViewItem CreateListViewItem(Book book) {
+            string[] details = {
+                book.Title,
+                book.Author,
+                book.Genre.GenreName,
+                book.NoOfPages.ToString(),
+                book.BookType.ToString(),
+                book.IsbnNo,
+                book.Location.LocationName,
+                book.Status,
+                book.BookId.ToString() ?? "Fejl",
+            };
+            return new ListViewItem(details);
+        }
     }
 }
+
 
 
 
