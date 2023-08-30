@@ -398,12 +398,14 @@ namespace Book_Desktop_Client.UI {
 
                 if (selectedSortBy == "Author") {
                     _selectedSortBy.Author = comboBox.SelectedItem.ToString();
-                    _selectedSortBy.Genre = null; // Reset the genre sorting
+                    _selectedSortBy.Genre = null; 
                     _selectedSortBy.Status = null;
+
                 } else if (selectedSortBy == "Genre") {
                     _selectedSortBy.Genre = Model.Genre.Parse(comboBoxSortBy.SelectedItem.ToString());
-                    _selectedSortBy.Author = null; // Reset the author sorting
+                    _selectedSortBy.Author = null; 
                     _selectedSortBy.Status = null;
+
                 } else if (selectedSortBy == "Status") {
                     _selectedSortBy.Status = StatusEnum.Læst.ToString();
                     _selectedSortBy.Genre = null;
