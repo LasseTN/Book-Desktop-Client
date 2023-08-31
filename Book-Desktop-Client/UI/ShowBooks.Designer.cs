@@ -80,6 +80,7 @@
             listViewShowBooks.BackColor = SystemColors.ScrollBar;
             listViewShowBooks.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, Status, bogId });
             listViewShowBooks.Cursor = Cursors.Hand;
+            listViewShowBooks.FullRowSelect = true;
             listViewShowBooks.Location = new Point(60, 125);
             listViewShowBooks.Name = "listViewShowBooks";
             listViewShowBooks.Size = new Size(994, 487);

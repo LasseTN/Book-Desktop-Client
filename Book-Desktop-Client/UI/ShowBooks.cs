@@ -460,8 +460,8 @@ namespace Book_Desktop_Client.UI {
                 _booksToShowList = _booksToShowList.OrderBy(book => book.Title).ToList();
             }
 
-            if (_selectedSortBy.BookType != null) { 
-                _booksToShowList = _booksToShowList.OrderBy(book => book.BookType).ToList();    
+            if (_selectedSortBy.BookType != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.BookType).ToList();
             }
 
             listViewShowBooks.Items.Clear();
