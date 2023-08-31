@@ -427,6 +427,7 @@ namespace Book_Desktop_Client.UI {
                     _selectedSortBy.Author = null;
                     _selectedSortBy.Genre = null;
                     _selectedSortBy.Status = null;
+                    _selectedSortBy.Title = null;
                 }
             }
         }
