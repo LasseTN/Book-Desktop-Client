@@ -116,8 +116,6 @@ namespace Book_Desktop_Client.UI {
                         b.Location.LocationName,
                         b.Status,
                         b.BookId.ToString() ?? "Fejl",
-
-
                     };
                     ListViewItem booksDetail = new ListViewItem(details);
                     listViewShowBooks.Items.Add(booksDetail);
@@ -274,9 +272,10 @@ namespace Book_Desktop_Client.UI {
             comboBoxLocation.DataSource = _locationList;
 
             // Sort By
-            comboBoxSortBy.Items.Add("Author");
+            comboBoxSortBy.Items.Add("Forfatter");
             comboBoxSortBy.Items.Add("Genre");
             comboBoxSortBy.Items.Add("Status");
+            comboBoxSortBy.Items.Add("Titel");
 
         }
 
@@ -396,20 +395,29 @@ namespace Book_Desktop_Client.UI {
             if (selectedIndex >= 0) {
                 string selectedSortBy = comboBox.SelectedItem.ToString();
 
-                if (selectedSortBy == "Author") {
+                if (selectedSortBy == "Forfatter") {
                     _selectedSortBy.Author = comboBox.SelectedItem.ToString();
-                    _selectedSortBy.Genre = null; 
+                    _selectedSortBy.Genre = null;
                     _selectedSortBy.Status = null;
+                    _selectedSortBy.Title = null;
 
                 } else if (selectedSortBy == "Genre") {
                     _selectedSortBy.Genre = Model.Genre.Parse(comboBoxSortBy.SelectedItem.ToString());
-                    _selectedSortBy.Author = null; 
+                    _selectedSortBy.Author = null;
                     _selectedSortBy.Status = null;
+                    _selectedSortBy.Title = null;
 
                 } else if (selectedSortBy == "Status") {
                     _selectedSortBy.Status = StatusEnum.Læst.ToString();
                     _selectedSortBy.Genre = null;
                     _selectedSortBy.Author = null;
+                    _selectedSortBy.Title = null;
+
+                } else if (selectedSortBy == "Titel") {
+                    _selectedSortBy.Title = comboBox.SelectedItem.ToString();
+                    _selectedSortBy.Author = null;
+                    _selectedSortBy.Genre = null;
+                    _selectedSortBy.Status = null;
                 }
             }
         }
@@ -437,6 +445,10 @@ namespace Book_Desktop_Client.UI {
 
             if (_selectedSortBy.Status != null) {
                 _booksToShowList = _booksToShowList.OrderBy(book => book.Status).ToList();
+            }
+
+            if (_selectedSortBy.Title != null) {
+                _booksToShowList = _booksToShowList.OrderBy(book => book.Title).ToList();
             }
 
             listViewShowBooks.Items.Clear();
