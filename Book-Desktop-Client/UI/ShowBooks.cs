@@ -210,7 +210,6 @@ namespace Book_Desktop_Client.UI {
             comboBoxLocation.Items.Clear();
             comboBoxStatus.Items.Clear();
             comboBoxSortBy.Items.Clear();
-            comboBoxSortBy.Items.Clear();
         }
 
         private void buttonCloseWindow_Click(object sender, EventArgs e) {
