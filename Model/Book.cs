@@ -39,6 +39,7 @@ namespace Model {
         }
 
         public Book() {
+
         }
 
 
