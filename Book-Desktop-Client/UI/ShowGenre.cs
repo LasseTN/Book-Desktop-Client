@@ -38,29 +38,20 @@ namespace Book_Desktop_Client.UI {
         }
 
         public async Task UpdateList() {
-
             string processText = "";
             labelProcessText.Text = processText;
             listViewShowGenres.Items.Clear();
             _genreList = await _genreControl.GetAllGenres();
 
             if (_genreList != null) {
-
                 if (_genreList.Count >= 1) {
-
                     processText = "Genrer blev opdateret";
-
                 } else if (_genreList.Count < 1) {
-                    processText = "Ingen genrere fundet";
+                    processText = "Ingen genrer fundet";
                 }
 
                 foreach (Genre genre in _genreList) {
-                    string[] details = 
-                        
-                    { 
-                    genre.GenreId.ToString() ?? "Intet" 
-                    };
-
+                    string[] details = { genre.GenreName, genre.GenreId.ToString() };
                     ListViewItem genreDetails = new ListViewItem(details);
                     listViewShowGenres.Items.Add(genreDetails);
                 }
@@ -69,8 +60,6 @@ namespace Book_Desktop_Client.UI {
             }
             labelProcessText.Text = processText;
         }
-
-
 
 
         private async void buttonCreateGenre_Click(object sender, EventArgs e) {
@@ -135,8 +124,8 @@ namespace Book_Desktop_Client.UI {
             int idRaw = GetAsInt(textBoxGenreId.Text);
             string genreName = textBoxGenre.Text;
 
-            if (idRaw != 0 && !string.IsNullOrEmpty(genreName)) { 
-                
+            if (idRaw != 0 && !string.IsNullOrEmpty(genreName)) {
+
                 Genre gen = new Genre(idRaw, genreName);
 
                 wasUpdatedOk = await _genreControl.UpdateGenreById(idRaw, gen);
@@ -152,7 +141,7 @@ namespace Book_Desktop_Client.UI {
 
 
         private async void buttonDeleteGenre_Click(object sender, EventArgs e) {
-             
+
             if (listViewShowGenres.SelectedItems.Count != 0) {
                 DialogResult dialogResult = MessageBox.Show("Er du sikker på at du vil slette den valgte genrer?", "Bekræft", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes) {
@@ -198,8 +187,8 @@ namespace Book_Desktop_Client.UI {
             if (listViewShowGenres.SelectedItems.Count > 0) {
                 ListViewItem item = listViewShowGenres.SelectedItems[0];
 
-                textBoxGenre.Text = item.SubItems[0].Text;
-                textBoxGenreId.Text = item.SubItems[1].Text;
+                textBoxGenre.Text = item.SubItems[1].Text;
+                textBoxGenreId.Text = item.SubItems[0].Text;
                 labelProcessText.Text = procesText + listViewShowGenres.SelectedItems[0].SubItems[1].Text;
 
             } else if (listViewShowGenres.SelectedItems.Count <= 0) {

@@ -161,7 +161,7 @@ namespace Book_Desktop_Client.UI {
 
 
         private async void listViewShowLocations_SelectedIndexChanged(object sender, EventArgs e) {
-            string processText = "Genre id";
+            string processText = "Location id";
 
             if (listViewShowLocations.SelectedItems.Count > 0) {
                 ListViewItem item = listViewShowLocations.SelectedItems[0];
