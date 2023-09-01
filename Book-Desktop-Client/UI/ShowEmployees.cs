@@ -79,7 +79,6 @@ namespace Book_Desktop_Client.UI {
                 if (DateTime.TryParseExact(item.SubItems[5].Text.Trim(), "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out tempDob)) {
                     dateTimePickerEmployee.Value = tempDob;
                 } else {
-                    // Handle invalid date format
                 }
 
             } else if (listViewShowEmployees.SelectedItems.Count <= 0) {
