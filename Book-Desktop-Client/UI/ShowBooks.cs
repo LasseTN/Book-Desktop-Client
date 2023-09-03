@@ -176,19 +176,20 @@ namespace Book_Desktop_Client.UI {
 
             if (_imageList.Count() > 0) {
 
-                foreach (var file in _imageList!) {
+                foreach (var file in _imageList) {
                     if (file.Length > 0) {
                         using (var ms = new MemoryStream()) {
                             file.CopyTo(ms);
                             var fileBytes = ms.ToArray();
                             string s = Convert.ToBase64String(fileBytes);
-                            toCreate.BookImagesPath!.Add(s);
+                            toCreate.BookImagesPath.Add(s);
                             labelProcessText.Text = "Billeder tilføjet";
                         }
                     }
                 }
             }
 
+           
             createdBook = await _bookControl.CreateNewBook(toCreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
