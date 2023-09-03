@@ -399,6 +399,7 @@ namespace Book_Desktop_Client.UI {
                     _selectedSortBy.Genre = null;
                     _selectedSortBy.Status = null;
                     _selectedSortBy.Title = null;
+                    _selectedSortBy.BookType = null;
 
 
                 } else if (selectedSortBy == "Genre") {
