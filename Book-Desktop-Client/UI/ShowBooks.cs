@@ -25,7 +25,6 @@ namespace Book_Desktop_Client.UI {
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
             _locationControl = new LocationControl();
-            _bookControl = new BookControl();
 
             LoadDataAsync();
             InitializeComponent();
@@ -153,7 +152,6 @@ namespace Book_Desktop_Client.UI {
                 } else {
                     pictureBox1.Image = null;
                 }
-
 
                 textBoxId.Text = item.SubItems[8].Text.Trim();
                 labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[9].Text;
@@ -418,8 +416,6 @@ namespace Book_Desktop_Client.UI {
             };
             return new ListViewItem(details);
         }
-
-
     }
 }
 
