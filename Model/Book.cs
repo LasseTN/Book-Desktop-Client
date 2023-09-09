@@ -10,10 +10,10 @@ namespace Model {
         public string IsbnNo { get; set; }
         public Location? Location { get; set; }
         public string Status { get; set; }
-        public List<string>? BookImagesPath { get; set; }
+        public string ImageURL { get; set; }
 
 
-        public Book(string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status ) {
+        public Book(string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status, string imageURL) {
             Title = title;
             Author = author;
             Genre = genre;
@@ -22,10 +22,10 @@ namespace Model {
             IsbnNo = isbnNo;
             Location = location;
             Status = status;
-            BookImagesPath = new List<string>();
+            ImageURL = imageURL;
         }
 
-        public Book(int bookId, string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status, List<string> bookImagesPath) {
+        public Book(int bookId, string title, string author, Genre? genre, int noOfPages, string bookType, string isbnNo, Location? location, string status, string imageURL) {
             BookId = bookId;
             Title = title;
             Author = author;
@@ -35,7 +35,7 @@ namespace Model {
             IsbnNo = isbnNo;
             Location = location;
             Status = status;
-            BookImagesPath = new List<string>();
+            ImageURL = imageURL;
         }
 
         public Book() {

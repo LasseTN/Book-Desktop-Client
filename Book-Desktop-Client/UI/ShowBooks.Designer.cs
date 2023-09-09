@@ -32,6 +32,7 @@
             BogType = new ColumnHeader();
             IsbnNr = new ColumnHeader();
             Lokation = new ColumnHeader();
+            ImageURL = new ColumnHeader();
             Status = new ColumnHeader();
             bogId = new ColumnHeader();
             BookList = new Label();
@@ -57,17 +58,19 @@
             buttonCreateBook = new Button();
             buttonGetAllBooks = new Button();
             buttonUpdateBook = new Button();
-            chooseFiles = new Button();
-            flowLayoutPanel1 = new FlowLayoutPanel();
             labelProcessText = new Label();
             SortBy = new Button();
             comboBoxSortBy = new ComboBox();
+            pictureBox1 = new PictureBox();
+            txtBoxImageURL = new TextBox();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // buttonCloseWindow
             // 
             buttonCloseWindow.BackColor = Color.Salmon;
-            buttonCloseWindow.Location = new Point(1543, 640);
+            buttonCloseWindow.Location = new Point(1614, 636);
             buttonCloseWindow.Name = "buttonCloseWindow";
             buttonCloseWindow.Size = new Size(121, 26);
             buttonCloseWindow.TabIndex = 22;
@@ -78,12 +81,12 @@
             // listViewShowBooks
             // 
             listViewShowBooks.BackColor = SystemColors.ScrollBar;
-            listViewShowBooks.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, Status, bogId });
+            listViewShowBooks.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, ImageURL, Status, bogId });
             listViewShowBooks.Cursor = Cursors.Hand;
             listViewShowBooks.FullRowSelect = true;
-            listViewShowBooks.Location = new Point(60, 125);
+            listViewShowBooks.Location = new Point(12, 83);
             listViewShowBooks.Name = "listViewShowBooks";
-            listViewShowBooks.Size = new Size(994, 487);
+            listViewShowBooks.Size = new Size(1117, 487);
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
@@ -124,6 +127,11 @@
             Lokation.Text = "Lokation";
             Lokation.Width = 70;
             // 
+            // ImageURL
+            // 
+            ImageURL.Text = "ImageURL";
+            ImageURL.Width = 120;
+            // 
             // Status
             // 
             Status.Text = "Status";
@@ -146,7 +154,7 @@
             // 
             // textBoxTitle
             // 
-            textBoxTitle.Location = new Point(1111, 125);
+            textBoxTitle.Location = new Point(1173, 83);
             textBoxTitle.Name = "textBoxTitle";
             textBoxTitle.Size = new Size(262, 23);
             textBoxTitle.TabIndex = 25;
@@ -154,7 +162,7 @@
             // comboBoxType
             // 
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(1111, 353);
+            comboBoxType.Location = new Point(1173, 311);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(179, 23);
             comboBoxType.TabIndex = 26;
@@ -162,7 +170,7 @@
             // comboBoxGenre
             // 
             comboBoxGenre.FormattingEnabled = true;
-            comboBoxGenre.Location = new Point(1111, 238);
+            comboBoxGenre.Location = new Point(1173, 196);
             comboBoxGenre.Name = "comboBoxGenre";
             comboBoxGenre.Size = new Size(179, 23);
             comboBoxGenre.TabIndex = 27;
@@ -171,7 +179,7 @@
             // comboBoxLocation
             // 
             comboBoxLocation.FormattingEnabled = true;
-            comboBoxLocation.Location = new Point(1111, 471);
+            comboBoxLocation.Location = new Point(1173, 429);
             comboBoxLocation.Name = "comboBoxLocation";
             comboBoxLocation.Size = new Size(179, 23);
             comboBoxLocation.TabIndex = 28;
@@ -180,35 +188,35 @@
             // comboBoxStatus
             // 
             comboBoxStatus.FormattingEnabled = true;
-            comboBoxStatus.Location = new Point(1111, 529);
+            comboBoxStatus.Location = new Point(1173, 487);
             comboBoxStatus.Name = "comboBoxStatus";
             comboBoxStatus.Size = new Size(179, 23);
             comboBoxStatus.TabIndex = 29;
             // 
             // textBoxAuthor
             // 
-            textBoxAuthor.Location = new Point(1111, 181);
+            textBoxAuthor.Location = new Point(1173, 139);
             textBoxAuthor.Name = "textBoxAuthor";
             textBoxAuthor.Size = new Size(262, 23);
             textBoxAuthor.TabIndex = 30;
             // 
             // textBoxNoOfPages
             // 
-            textBoxNoOfPages.Location = new Point(1111, 294);
+            textBoxNoOfPages.Location = new Point(1173, 252);
             textBoxNoOfPages.Name = "textBoxNoOfPages";
             textBoxNoOfPages.Size = new Size(179, 23);
             textBoxNoOfPages.TabIndex = 31;
             // 
             // textBoxIsbnNo
             // 
-            textBoxIsbnNo.Location = new Point(1111, 410);
+            textBoxIsbnNo.Location = new Point(1173, 368);
             textBoxIsbnNo.Name = "textBoxIsbnNo";
             textBoxIsbnNo.Size = new Size(179, 23);
             textBoxIsbnNo.TabIndex = 32;
             // 
             // textBoxId
             // 
-            textBoxId.Location = new Point(1111, 589);
+            textBoxId.Location = new Point(1173, 589);
             textBoxId.Name = "textBoxId";
             textBoxId.Size = new Size(179, 23);
             textBoxId.TabIndex = 33;
@@ -217,7 +225,7 @@
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitle.Location = new Point(1111, 105);
+            lblTitle.Location = new Point(1173, 63);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(36, 17);
             lblTitle.TabIndex = 34;
@@ -227,7 +235,7 @@
             // 
             lblAuthor.AutoSize = true;
             lblAuthor.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblAuthor.Location = new Point(1111, 161);
+            lblAuthor.Location = new Point(1173, 119);
             lblAuthor.Name = "lblAuthor";
             lblAuthor.Size = new Size(62, 17);
             lblAuthor.TabIndex = 35;
@@ -237,7 +245,7 @@
             // 
             lblGenre.AutoSize = true;
             lblGenre.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblGenre.Location = new Point(1111, 218);
+            lblGenre.Location = new Point(1173, 176);
             lblGenre.Name = "lblGenre";
             lblGenre.Size = new Size(44, 17);
             lblGenre.TabIndex = 36;
@@ -247,7 +255,7 @@
             // 
             lblNoOfPages.AutoSize = true;
             lblNoOfPages.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNoOfPages.Location = new Point(1111, 274);
+            lblNoOfPages.Location = new Point(1173, 232);
             lblNoOfPages.Name = "lblNoOfPages";
             lblNoOfPages.Size = new Size(75, 17);
             lblNoOfPages.TabIndex = 37;
@@ -267,7 +275,7 @@
             // 
             lblType.AutoSize = true;
             lblType.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblType.Location = new Point(1111, 333);
+            lblType.Location = new Point(1173, 291);
             lblType.Name = "lblType";
             lblType.Size = new Size(37, 17);
             lblType.TabIndex = 39;
@@ -277,7 +285,7 @@
             // 
             LblIsbn.AutoSize = true;
             LblIsbn.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            LblIsbn.Location = new Point(1111, 390);
+            LblIsbn.Location = new Point(1173, 348);
             LblIsbn.Name = "LblIsbn";
             LblIsbn.Size = new Size(51, 17);
             LblIsbn.TabIndex = 40;
@@ -287,7 +295,7 @@
             // 
             lblLokation.AutoSize = true;
             lblLokation.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLokation.Location = new Point(1111, 451);
+            lblLokation.Location = new Point(1173, 409);
             lblLokation.Name = "lblLokation";
             lblLokation.Size = new Size(62, 17);
             lblLokation.TabIndex = 41;
@@ -297,7 +305,7 @@
             // 
             lblStatus.AutoSize = true;
             lblStatus.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblStatus.Location = new Point(1111, 509);
+            lblStatus.Location = new Point(1173, 467);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(46, 17);
             lblStatus.TabIndex = 42;
@@ -307,7 +315,7 @@
             // 
             lblBookId.AutoSize = true;
             lblBookId.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblBookId.Location = new Point(1111, 569);
+            lblBookId.Location = new Point(1173, 569);
             lblBookId.Name = "lblBookId";
             lblBookId.Size = new Size(20, 17);
             lblBookId.TabIndex = 43;
@@ -315,7 +323,7 @@
             // 
             // buttonCreateBook
             // 
-            buttonCreateBook.Location = new Point(1111, 636);
+            buttonCreateBook.Location = new Point(1173, 636);
             buttonCreateBook.Name = "buttonCreateBook";
             buttonCreateBook.Size = new Size(121, 34);
             buttonCreateBook.TabIndex = 44;
@@ -335,30 +343,13 @@
             // 
             // buttonUpdateBook
             // 
-            buttonUpdateBook.Location = new Point(1252, 636);
+            buttonUpdateBook.Location = new Point(1314, 636);
             buttonUpdateBook.Name = "buttonUpdateBook";
             buttonUpdateBook.Size = new Size(121, 34);
             buttonUpdateBook.TabIndex = 46;
             buttonUpdateBook.Text = "Opdater bog";
             buttonUpdateBook.UseVisualStyleBackColor = true;
             buttonUpdateBook.Click += buttonUpdateBook_Click;
-            // 
-            // chooseFiles
-            // 
-            chooseFiles.Location = new Point(1443, 399);
-            chooseFiles.Name = "chooseFiles";
-            chooseFiles.Size = new Size(121, 34);
-            chooseFiles.TabIndex = 48;
-            chooseFiles.Text = "Vælg billedfil";
-            chooseFiles.UseVisualStyleBackColor = true;
-            chooseFiles.Click += chooseFiles_Click;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Location = new Point(1443, 125);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(221, 251);
-            flowLayoutPanel1.TabIndex = 49;
             // 
             // labelProcessText
             // 
@@ -388,17 +379,45 @@
             comboBoxSortBy.TabIndex = 52;
             comboBoxSortBy.SelectedIndexChanged += ComboBoxSortBy_SelectedIndexChanged;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = SystemColors.Info;
+            pictureBox1.Location = new Point(1441, 196);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(294, 316);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 53;
+            pictureBox1.TabStop = false;
+            // 
+            // txtBoxImageURL
+            // 
+            txtBoxImageURL.Location = new Point(1173, 543);
+            txtBoxImageURL.Name = "txtBoxImageURL";
+            txtBoxImageURL.Size = new Size(179, 23);
+            txtBoxImageURL.TabIndex = 54;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(1173, 523);
+            label1.Name = "label1";
+            label1.Size = new Size(70, 17);
+            label1.TabIndex = 55;
+            label1.Text = "ImageURL";
+            // 
             // ShowBooks
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Info;
             ClientSize = new Size(1747, 787);
+            Controls.Add(label1);
+            Controls.Add(txtBoxImageURL);
+            Controls.Add(pictureBox1);
             Controls.Add(comboBoxSortBy);
             Controls.Add(SortBy);
             Controls.Add(labelProcessText);
-            Controls.Add(flowLayoutPanel1);
-            Controls.Add(chooseFiles);
             Controls.Add(buttonUpdateBook);
             Controls.Add(buttonGetAllBooks);
             Controls.Add(buttonCreateBook);
@@ -427,6 +446,7 @@
             ForeColor = SystemColors.ControlText;
             Name = "ShowBooks";
             Text = "ShowBooks";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -467,10 +487,12 @@
         private Button buttonCreateBook;
         private Button buttonGetAllBooks;
         private Button buttonUpdateBook;
-        private Button chooseFiles;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Label labelProcessText;
         private Button SortBy;
         private ComboBox comboBoxSortBy;
+        private PictureBox pictureBox1;
+        private ColumnHeader ImageURL;
+        private TextBox txtBoxImageURL;
+        private Label label1;
     }
 }

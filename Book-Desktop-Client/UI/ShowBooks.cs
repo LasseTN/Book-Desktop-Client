@@ -1,18 +1,14 @@
 ﻿using Book_Desktop_Client.ControlLayer;
 using Book_Desktop_Client.ControlLayer.Interfaces;
 using Book_Desktop_Client.Util;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Model;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
+using System.Net;
 
 namespace Book_Desktop_Client.UI {
     public partial class ShowBooks : Form {
 
         private Book _selectedSortBy;
         private Book _bookToUpdate;
-        private List<IFormFile> _imageList;
 
         private List<Book> _booksToShowList;
         private List<Genre>? _genreList;
@@ -23,13 +19,13 @@ namespace Book_Desktop_Client.UI {
         private readonly ILocationControl _locationControl;
 
         public ShowBooks() {
+            _bookControl = new BookControl();
             _selectedSortBy = new Book();
             _bookToUpdate = new Book();
             _booksToShowList = new List<Book>();
             _genreControl = new GenreControl();
             _locationControl = new LocationControl();
             _bookControl = new BookControl();
-            _imageList = new List<IFormFile>();
 
             LoadDataAsync();
             InitializeComponent();
@@ -114,6 +110,7 @@ namespace Book_Desktop_Client.UI {
                         b.BookType,
                         b.IsbnNo,
                         b.Location.LocationName,
+                        b.ImageURL.ToString(),
                         b.Status,
                         b.BookId.ToString() ?? "Fejl",
                     };
@@ -137,9 +134,29 @@ namespace Book_Desktop_Client.UI {
                 comboBoxType.Text = item.SubItems[4].Text.Trim();
                 textBoxIsbnNo.Text = item.SubItems[5].Text.Trim();
                 comboBoxLocation.Text = item.SubItems[6].Text.Trim();
-                comboBoxStatus.Text = item.SubItems[7].Text.Trim();
+                comboBoxStatus.Text = item.SubItems[8].Text.Trim();
+                txtBoxImageURL.Text = item.SubItems[7].Text.Trim();
+
+                // Checks if the URL is valid
+                if (Uri.TryCreate(item.SubItems[7].Text.Trim(), UriKind.Absolute, out Uri imageUrl)) {
+                    try {
+                        using (WebClient webClient = new WebClient()) {
+                            byte[] data = webClient.DownloadData(imageUrl);
+                            using (MemoryStream ms = new MemoryStream(data)) {
+                                pictureBox1.Image = Image.FromStream(ms);
+                                pictureBox1.Load(imageUrl.OriginalString);
+                            }
+                        }
+                    } catch (Exception ex) {
+                        MessageBox.Show("Error loading the image:" + ex.Message);
+                    }
+                } else {
+                    pictureBox1.Image = null;
+                }
+
+
                 textBoxId.Text = item.SubItems[8].Text.Trim();
-                labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[8].Text;
+                labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[9].Text;
 
             }
         }
@@ -170,26 +187,10 @@ namespace Book_Desktop_Client.UI {
             Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
             toCreate.Location = selectedLocation;
             toCreate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
-            toCreate.BookImagesPath = new List<string>();
+            toCreate.ImageURL = txtBoxImageURL.Text;
 
             labelProcessText.Text = "Stadigvæk igang";
 
-            if (_imageList.Count() > 0) {
-
-                foreach (var file in _imageList) {
-                    if (file.Length > 0) {
-                        using (var ms = new MemoryStream()) {
-                            file.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            string s = Convert.ToBase64String(fileBytes);
-                            toCreate.BookImagesPath.Add(s);
-                            labelProcessText.Text = "Billeder tilføjet";
-                        }
-                    }
-                }
-            }
-
-           
             createdBook = await _bookControl.CreateNewBook(toCreate);
             if (createdBook != null) {
                 labelProcessText.Text = "Bogen er oprettet";
@@ -278,78 +279,6 @@ namespace Book_Desktop_Client.UI {
             comboBoxSortBy.Items.Add("Bogtype");
         }
 
-
-        //Button for choosing images
-        private void chooseFiles_Click(object sender, EventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Multiselect = true;
-            if (openFileDialog.ShowDialog() == DialogResult.OK) {
-                foreach (string fileName in openFileDialog.FileNames) {
-                    byte[] fileData = File.ReadAllBytes(fileName);
-                    MemoryStream stream = new MemoryStream(fileData);
-                    FormFile file = new FormFile(stream, 0, fileData.Length, null, Path.GetFileName(fileName));
-                    _imageList.Add(file);
-                }
-                ShowImages();
-            }
-        }
-
-        // Displays the image in the app and adds a delete button, so you can delete the picture
-        private void ShowImages() {
-            flowLayoutPanel1.Controls.Clear();
-            foreach (FormFile file in _imageList) {
-                PictureBox pictureBox = new PictureBox();
-                pictureBox.Image = Image.FromStream(file.OpenReadStream());
-                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox.Click += new EventHandler(PictureBox_Click!);
-
-                Button btnDelete = new Button();
-                btnDelete.Text = "Slet";
-                btnDelete.Height = 30;
-                btnDelete.Tag = file;
-                btnDelete.Click += new EventHandler(BtnDelete_Click!);
-
-                FlowLayoutPanel panel = new FlowLayoutPanel();
-                panel.Controls.Add(pictureBox);
-                panel.Controls.Add(btnDelete);
-
-                flowLayoutPanel1.Controls.Add(panel);
-            }
-        }
-
-        // Click the uploaded photo to maximize it
-        private void PictureBox_Click(object sender, EventArgs e) {
-            PictureBox pictureBox = (PictureBox)sender;
-            Image image = pictureBox.Image;
-
-            Form popUpForm = new Form();
-            popUpForm.StartPosition = FormStartPosition.CenterParent;
-            popUpForm.Size = new Size(800, 600);
-            popUpForm.MaximizeBox = false;
-            popUpForm.MinimizeBox = false;
-            popUpForm.Text = "Billede visning";
-
-            PictureBox popupPictureBox = new PictureBox();
-            popupPictureBox.Dock = DockStyle.Fill;
-            popupPictureBox.Image = image;
-            popupPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
-            popUpForm.Controls.Add(popupPictureBox);
-            popUpForm.ShowDialog();
-        }
-
-        // Delete the uploaded photo
-        private void BtnDelete_Click(object sender, EventArgs e) {
-            Button btnDelete = (Button)sender;
-            FormFile file = (FormFile)btnDelete.Tag;
-            _imageList.Remove(file);
-            FlowLayoutPanel panel = (FlowLayoutPanel)btnDelete.Parent;
-            PictureBox pictureBox = (PictureBox)panel.Controls[0];
-            pictureBox.Dispose();
-            file.OpenReadStream().Dispose();
-            panel.Dispose();
-        }
-
         private async void buttonUpdateBook_Click(object sender, EventArgs e) {
             bool isUpdated = false;
 
@@ -374,7 +303,7 @@ namespace Book_Desktop_Client.UI {
                     Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
                     _bookToUpdate.Location = selectedLocation;
                     _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
-                    _bookToUpdate.BookImagesPath = new List<string>();
+                    _bookToUpdate.ImageURL = txtBoxImageURL.Text;
 
                     // Passes the found bookId to the update method
                     isUpdated = await _bookControl.UpdateBook(_bookToUpdate);
