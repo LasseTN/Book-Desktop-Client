@@ -412,6 +412,7 @@ namespace Book_Desktop_Client.UI {
                 book.BookType.ToString(),
                 book.IsbnNo,
                 book.Location.LocationName,
+                book.ImageURL.ToString(),
                 book.Status,
                 book.BookId.ToString() ?? "Fejl",
             };

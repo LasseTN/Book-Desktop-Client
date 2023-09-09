@@ -70,7 +70,7 @@
             // buttonCloseWindow
             // 
             buttonCloseWindow.BackColor = Color.Salmon;
-            buttonCloseWindow.Location = new Point(1614, 636);
+            buttonCloseWindow.Location = new Point(1592, 644);
             buttonCloseWindow.Name = "buttonCloseWindow";
             buttonCloseWindow.Size = new Size(121, 26);
             buttonCloseWindow.TabIndex = 22;
@@ -84,9 +84,9 @@
             listViewShowBooks.Columns.AddRange(new ColumnHeader[] { Titel, Forfatter, Genre, SideAntal, BogType, IsbnNr, Lokation, ImageURL, Status, bogId });
             listViewShowBooks.Cursor = Cursors.Hand;
             listViewShowBooks.FullRowSelect = true;
-            listViewShowBooks.Location = new Point(12, 83);
+            listViewShowBooks.Location = new Point(27, 83);
             listViewShowBooks.Name = "listViewShowBooks";
-            listViewShowBooks.Size = new Size(1117, 487);
+            listViewShowBooks.Size = new Size(1117, 529);
             listViewShowBooks.TabIndex = 23;
             listViewShowBooks.UseCompatibleStateImageBehavior = false;
             listViewShowBooks.View = View.Details;
@@ -333,7 +333,7 @@
             // 
             // buttonGetAllBooks
             // 
-            buttonGetAllBooks.Location = new Point(60, 642);
+            buttonGetAllBooks.Location = new Point(27, 642);
             buttonGetAllBooks.Name = "buttonGetAllBooks";
             buttonGetAllBooks.Size = new Size(121, 34);
             buttonGetAllBooks.TabIndex = 45;
@@ -362,7 +362,7 @@
             // 
             // SortBy
             // 
-            SortBy.Location = new Point(214, 642);
+            SortBy.Location = new Point(174, 640);
             SortBy.Name = "SortBy";
             SortBy.Size = new Size(121, 34);
             SortBy.TabIndex = 51;
@@ -373,7 +373,7 @@
             // comboBoxSortBy
             // 
             comboBoxSortBy.FormattingEnabled = true;
-            comboBoxSortBy.Location = new Point(352, 647);
+            comboBoxSortBy.Location = new Point(334, 647);
             comboBoxSortBy.Name = "comboBoxSortBy";
             comboBoxSortBy.Size = new Size(179, 23);
             comboBoxSortBy.TabIndex = 52;
