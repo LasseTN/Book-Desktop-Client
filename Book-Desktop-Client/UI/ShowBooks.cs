@@ -153,7 +153,7 @@ namespace Book_Desktop_Client.UI {
                     pictureBox1.Image = null;
                 }
 
-                textBoxId.Text = item.SubItems[8].Text.Trim();
+                textBoxId.Text = item.SubItems[9].Text.Trim();
                 labelProcessText.Text = processText + listViewShowBooks.SelectedItems[0].SubItems[9].Text;
 
             }
@@ -207,6 +207,7 @@ namespace Book_Desktop_Client.UI {
             comboBoxGenre.Items.Clear();
             comboBoxType.Items.Clear();
             comboBoxLocation.Items.Clear();
+            txtBoxImageURL.Clear();
             comboBoxStatus.Items.Clear();
             comboBoxSortBy.Items.Clear();
         }
@@ -300,8 +301,9 @@ namespace Book_Desktop_Client.UI {
                     _bookToUpdate.IsbnNo = textBoxIsbnNo.Text;
                     Location selectedLocation = (Location)comboBoxLocation.SelectedItem;
                     _bookToUpdate.Location = selectedLocation;
-                    _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
                     _bookToUpdate.ImageURL = txtBoxImageURL.Text;
+                    _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
+
 
                     // Passes the found bookId to the update method
                     isUpdated = await _bookControl.UpdateBook(_bookToUpdate);
