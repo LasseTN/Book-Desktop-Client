@@ -21,13 +21,24 @@ namespace Book_Desktop_Client.ServiceLayer {
             return httpResponseMessage;
         }
 
+        // Defines a method that initiates a GET request to the API.
         public async Task<HttpResponseMessage?> CallServiceGet() {
+
+            // Initializes a nullable HttpResponseMessage object to hold the response from the API.
             HttpResponseMessage? httpResponseMessage = null;
+
+            // Checks if UseUrl is set, meaning there is a specific URL to use for this GET request.
             if (UseUrl != null) {
+
+                // Makes the actual asynchronous GET request to the service using the HttpClient (HttpEnabler).
+                // Assigns the received HttpResponseMessage to httpResponseMessage.
                 httpResponseMessage = await HttpEnabler.GetAsync(UseUrl);
             }
+
+            // Returns the HttpResponseMessage or null if the GET request could not be made.
             return httpResponseMessage;
         }
+
 
         public async Task<HttpResponseMessage?> CallServicePost(StringContent postJson) {
             HttpResponseMessage? httpResponseMessage = null;

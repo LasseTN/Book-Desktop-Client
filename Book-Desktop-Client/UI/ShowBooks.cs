@@ -78,47 +78,72 @@ namespace Book_Desktop_Client.UI {
             ShowBooks showBookModels = new ShowBooks();
         }
 
+        // This method is responsible for retrieving all books and displaying them.
         private async Task GetAllBooks() {
+
+            // Disable the button to prevent multiple clicks.
             buttonGetAllBooks.Enabled = false;
+
+            // Set the label to indicate the process is running.
             labelProcessText.Text = "Arbejder...";
+
+            // Clear the previous list of books.
             listViewShowBooks.Items.Clear();
+
+            // Await the completion of the GetAllBooks method from _bookControl.
             _booksToShowList = await _bookControl.GetAllBooks();
 
+            // Check if the list is not null.
             if (_booksToShowList != null) {
 
+                // If there 1 or more books then...
                 if (_booksToShowList.Count >= 1) {
 
+                    // Display the number of books found.
                     labelProcessText.Text = $"Fandt: {_booksToShowList.Count.ToString()} bøger";
 
                 } else {
+
                     labelProcessText.Text = "Ingen bøger fundet";
                 }
             } else {
+
+                // If the list is null, indicate that something went wrong.
                 labelProcessText.Text = "Noget gik galt";
             }
+
+            // Show a message box if the REST API is not accessible (or if _booksToShowList is null for some other reason).
             if (_booksToShowList == null) {
                 MessageBox.Show("Er rest åben?");
             } else {
-                foreach (Book b in _booksToShowList) {
-                    string[] details = {
 
-                        b.Title,
-                        b.Author,
-                        b.Genre.GenreName,
-                        b.NoOfPages.ToString(),
-                        b.BookType,
-                        b.IsbnNo,
-                        b.Location.LocationName,
-                        b.ImageURL.ToString(),
-                        b.Status,
-                        b.BookId.ToString() ?? "Fejl",
-                    };
+                // Loop through each book object in the list.
+                foreach (Book b in _booksToShowList) {
+
+                    // Prepare an array of book details.
+                    string[] details = {
+                b.Title,
+                b.Author,
+                b.Genre.GenreName,
+                b.NoOfPages.ToString(),
+                b.BookType,
+                b.IsbnNo,
+                b.Location.LocationName,
+                b.ImageURL.ToString(),
+                b.Status,
+                b.BookId.ToString() ?? "Fejl", // If bookId is null write error
+            };
+
+                    // Create a ListViewItem and add it to the ListView.
                     ListViewItem booksDetail = new ListViewItem(details);
                     listViewShowBooks.Items.Add(booksDetail);
                 }
+
+                // Re-enable the button after the process is complete.
                 buttonGetAllBooks.Enabled = true;
             }
         }
+
 
         private void listViewShowBooks_SelectedIndexChanged(object sender, EventArgs e) {
             string processText = "Bog id ";
@@ -303,7 +328,6 @@ namespace Book_Desktop_Client.UI {
                     _bookToUpdate.Location = selectedLocation;
                     _bookToUpdate.ImageURL = txtBoxImageURL.Text;
                     _bookToUpdate.Status = ((StatusEnum)comboBoxStatus.SelectedItem).ToString();
-
 
                     // Passes the found bookId to the update method
                     isUpdated = await _bookControl.UpdateBook(_bookToUpdate);
