@@ -121,18 +121,20 @@ namespace Book_Desktop_Client.UI {
                 foreach (Book b in _booksToShowList) {
 
                     // Prepare an array of book details.
+                    string imageUrl = b.ImageURL != null ? b.ImageURL.ToString() : "No Image"; // Handle null or non-convertible value
                     string[] details = {
-                b.Title,
-                b.Author,
-                b.Genre.GenreName,
-                b.NoOfPages.ToString(),
-                b.BookType,
-                b.IsbnNo,
-                b.Location.LocationName,
-                b.ImageURL.ToString(),
-                b.Status,
-                b.BookId.ToString() ?? "Fejl", // If bookId is null write error
-            };
+                    b.Title,
+                    b.Author,
+                    b.Genre.GenreName,
+                    b.NoOfPages.ToString(),
+                    b.BookType,
+                    b.IsbnNo,
+                    b.Location.LocationName,
+                    imageUrl, // Use the modified imageUrl variable
+                    b.Status,
+                    b.BookId.ToString() ?? "Fejl"
+                };
+
 
                     // Create a ListViewItem and add it to the ListView.
                     ListViewItem booksDetail = new ListViewItem(details);
